@@ -9,6 +9,7 @@ import {
   MessageSquare,
   ArrowUpRight,
   ShieldCheck,
+  Lock,
 } from 'lucide-react';
 import {
   FacebookIcon,
@@ -192,15 +193,23 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Verified Fact Seal */}
+        {/* Bottom Bar: Copyright, Verified Fact Seal, and Admin Entry */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#79998F]">
           <div className="flex items-center gap-2 text-center sm:text-start">
             <ShieldCheck className="w-4 h-4 text-[#80ED99] shrink-0" />
             <span>{content.footer.disclaimer}</span>
           </div>
 
-          <div className="text-center sm:text-end">
-            © {new Date().getFullYear()} {companyData.name}. {content.footer.rights}
+          <div className="flex items-center gap-4 text-center sm:text-end">
+            <span>© {new Date().getFullYear()} {companyData.name}. {content.footer.rights}</span>
+            <Link
+              href={`/${locale}/admin`}
+              className="inline-flex items-center gap-1 text-[11px] text-[#79998F] hover:text-white px-2 py-1 rounded bg-[#13382F] border border-[#215749]"
+              title="Admin Control Panel"
+            >
+              <Lock className="w-3 h-3 text-[#FF3B53]" />
+              <span>CMS Admin</span>
+            </Link>
           </div>
         </div>
       </div>

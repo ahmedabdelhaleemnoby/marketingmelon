@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { addInquiry } from '@/data/store';
 
-// Simple in-memory rate limiting store (key: IP, value: timestamp array)
+// In-memory rate limiting store (key: IP, value: timestamp array)
 const rateLimitStore = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const MAX_REQUESTS_PER_WINDOW = 5;
@@ -43,7 +44,6 @@ export async function POST(req: NextRequest) {
 
     // 2. Anti-Spam Honeypot Verification
     if (honeypot && honeypot.trim().length > 0) {
-      // Bot trapped
       return NextResponse.json(
         {
           success: false,
@@ -89,12 +89,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 4. Provider Dispatch Check (Resend, SendGrid, or Custom SMTP via Env Vars)
+    // 4. Record Lead in Admin Store
+    const savedInquiry = addInquiry({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone?.trim() || undefined,
+      company: company?.trim() || undefined,
+      services: Array.isArray(services) ? services : services ? [services] : [],
+      budget: budget || undefined,
+      message: message.trim(),
+    });
+
+    // 5. Provider Dispatch Check (Resend, SendGrid, or Custom SMTP via Env Vars)
     const resendApiKey = process.env.RESEND_API_KEY;
     const sendgridApiKey = process.env.SENDGRID_API_KEY;
     const contactRecipient = process.env.CONTACT_EMAIL_RECIPIENT || 'info@marketingmelon.online';
 
-    // If Resend API Key is configured
     if (resendApiKey) {
       try {
         const emailRes = await fetch('https://api.resend.com/emails', {
@@ -127,6 +137,7 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({
             success: true,
             message: 'Inquiry successfully delivered to Marketing Melon Agency.',
+            inquiryId: savedInquiry.id,
           });
         }
       } catch (dispatchError) {
@@ -134,7 +145,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // If SendGrid API Key is configured
     if (sendgridApiKey) {
       try {
         const sendgridRes = await fetch('https://api.sendgrid.com/v3/mail/send', {
@@ -172,6 +182,7 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({
             success: true,
             message: 'Inquiry successfully delivered to Marketing Melon Agency.',
+            inquiryId: savedInquiry.id,
           });
         }
       } catch (sendgridError) {
@@ -179,14 +190,14 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 5. Honest Status: Provider credentials not yet set in environment
-    // We never fake success when credentials are missing.
+    // 6. Honest Status: Recorded in dashboard store, but direct SMTP unconfigured
     return NextResponse.json(
       {
         success: false,
         error:
-          'Direct email gateway is currently in configuration awaiting API credentials. Please connect directly via Cairo/Saudi WhatsApp or our direct emails below.',
+          'Inquiry captured in agency dashboard! Direct email gateway is currently awaiting active SMTP credentials. Please also connect via WhatsApp or Email below for immediate response.',
         code: 'PROVIDER_UNCONFIGURED',
+        inquiryId: savedInquiry.id,
         directContacts: {
           email: 'info@marketingmelon.online',
           secondaryEmail: 'marketingmelon1@gmail.com',
