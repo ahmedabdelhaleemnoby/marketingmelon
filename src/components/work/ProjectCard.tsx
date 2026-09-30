@@ -13,52 +13,52 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, locale }) => 
   const isRTL = locale === 'ar';
 
   return (
-    <div className="group rounded-3xl bg-white border border-[#EBE8DE] overflow-hidden flex flex-col justify-between card-hover-glow">
+    <div className="group rounded-3xl bg-white border border-[#EBE8DE] overflow-hidden flex flex-col justify-between card-3d shadow-lg">
       {/* Project Visual Stage Header */}
       <div
         className={`relative h-64 sm:h-72 w-full bg-gradient-to-br ${project.heroColor} p-6 sm:p-8 flex flex-col justify-between overflow-hidden`}
       >
-        {/* Decorative Grid and Graphic Elements */}
-        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-[#FF3B53]/20 rounded-full blur-2xl pointer-events-none" />
+        {/* 3D Radial Grid and Depth Glow */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1.5px,transparent_1.5px)] [background-size:18px_18px] pointer-events-none" />
+        <div className="absolute -bottom-10 -right-10 w-52 h-52 bg-[#FF3B53]/25 rounded-full blur-2xl pointer-events-none" />
 
         {/* Top Header Tags */}
         <div className="relative z-10 flex items-center justify-between gap-2">
           <Badge
             variant="emerald"
             size="sm"
-            className="bg-black/30 backdrop-blur-md text-[#80ED99] border-white/10"
+            className="bg-black/40 backdrop-blur-md text-[#80ED99] border-white/20 badge-3d"
           >
             <Building className="w-3 h-3" />
             <span>{project.category}</span>
           </Badge>
 
           {project.isVerifiedProject && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#10B981]/20 backdrop-blur-md text-[#80ED99] text-[11px] font-bold border border-[#10B981]/30">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#10B981]/25 backdrop-blur-md text-[#80ED99] text-[11px] font-bold border border-[#10B981]/40 badge-3d">
               <CheckCircle2 className="w-3 h-3" />
               <span>{isRTL ? 'مشروع معتمد' : 'Verified Client'}</span>
             </span>
           )}
         </div>
 
-        {/* Center Display Emblem */}
+        {/* Center Display 3D Floating Emblem */}
         <div className="relative z-10 text-center py-4">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:scale-105 transition-transform duration-300">
-            <Sparkles className="w-8 h-8 text-[#80ED99]" />
+          <div className="w-18 h-18 sm:w-22 sm:h-22 mx-auto rounded-3xl bg-white/15 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white shadow-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+            <Sparkles className="w-9 h-9 text-[#80ED99]" />
           </div>
-          <div className="text-xs uppercase tracking-widest text-white/80 font-bold mt-3">
+          <div className="text-xs uppercase tracking-widest text-white/90 font-black mt-3">
             {project.client}
           </div>
         </div>
 
         {/* Bottom Banner */}
-        <div className="relative z-10 text-xs text-white/70 font-mono">
+        <div className="relative z-10 text-xs text-white/80 font-mono">
           {project.year}
         </div>
       </div>
 
       {/* Project Information Body */}
-      <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+      <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between bg-white">
         <div>
           <h3 className="text-2xl font-black text-[#14171A] mb-3 group-hover:text-[#FF3B53] transition-colors">
             {project.title}
@@ -68,7 +68,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, locale }) => 
             {project.summary}
           </p>
 
-          {/* Verified Scope Pills */}
+          {/* Verified Scope 3D Chips */}
           <div className="space-y-2 mb-6">
             <div className="text-xs font-bold text-[#8C959F] uppercase tracking-wider">
               {isRTL ? 'نطاق العمل المنفذ' : 'Executed Scope'}
@@ -77,7 +77,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, locale }) => 
               {project.verifiedScope.map((scopeItem, idx) => (
                 <span
                   key={idx}
-                  className="inline-flex items-center text-xs px-2.5 py-1 rounded-md bg-[#FAF9F5] text-[#3E454F] border border-[#EBE8DE]"
+                  className="inline-flex items-center text-xs px-2.5 py-1 rounded-lg bg-[#FAF9F5] text-[#3E454F] border border-[#EBE8DE] shadow-2xs"
                 >
                   {scopeItem}
                 </span>
@@ -90,7 +90,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, locale }) => 
         <div className="pt-4 border-t border-[#EBE8DE] flex items-center justify-between">
           <Link
             href={`/${locale}/work/${project.slug}`}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0F4C3A] hover:text-[#FF3B53] transition-colors group/link"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1E6B27] hover:text-[#FF3B53] transition-colors group/link"
           >
             <span>{isRTL ? 'استعراض دراسة الحالة' : 'View Full Case Study'}</span>
             <ArrowUpRight

@@ -12,7 +12,6 @@ import {
   AlertCircle,
   MessageSquare,
   Mail,
-  Phone,
   ShieldAlert,
 } from 'lucide-react';
 
@@ -97,11 +96,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
   )}`;
 
   return (
-    <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-10 shadow-lg relative overflow-hidden">
+    <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-10 shadow-xl relative overflow-hidden card-3d">
       {/* Success State */}
       {status === 'success' ? (
         <div className="py-12 text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center mx-auto shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-[#EBF7F3] text-[#1E6B27] flex items-center justify-center mx-auto shadow-md">
             <CheckCircle2 className="w-10 h-10 text-[#10B981]" />
           </div>
           <div className="space-y-2 max-w-md mx-auto">
@@ -137,7 +136,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                   honeypot: '',
                 });
               }}
-              className="text-xs text-[#586069] hover:text-[#14171A] underline font-semibold py-2"
+              className="text-xs text-[#586069] hover:text-[#14171A] underline font-semibold py-2 cursor-pointer"
             >
               {isRTL ? 'إرسال استفسار آخر' : 'Submit another inquiry'}
             </button>
@@ -145,7 +144,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Honeypot Spam Trap (Hidden from real users) */}
+          {/* Honeypot Spam Trap */}
           <div className="hidden" aria-hidden="true">
             <label htmlFor="company_trap">Please leave this field empty</label>
             <input
@@ -159,9 +158,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
             />
           </div>
 
-          {/* Unconfigured Provider Honest Banner (when SMTP credentials aren't active yet) */}
+          {/* Unconfigured Provider Honest Banner */}
           {status === 'unconfigured' && (
-            <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-3">
+            <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-3 shadow-xs">
               <div className="flex items-start gap-3">
                 <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                 <div className="space-y-1">
@@ -199,7 +198,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
 
           {/* Generic Error Notice */}
           {status === 'error' && (
-            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 flex items-start gap-3">
+            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 flex items-start gap-3 shadow-xs">
               <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
               <div className="text-xs leading-relaxed">{errorMessage}</div>
             </div>
@@ -217,7 +216,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder={content.contactPage.form.namePlaceholder}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 transition-all outline-none"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 shadow-inner transition-all outline-none"
               />
             </div>
 
@@ -231,7 +230,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder={content.contactPage.form.emailPlaceholder}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 transition-all outline-none"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 shadow-inner transition-all outline-none"
               />
             </div>
           </div>
@@ -247,7 +246,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder={content.contactPage.form.phonePlaceholder}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 transition-all outline-none"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 shadow-inner transition-all outline-none"
               />
             </div>
 
@@ -260,17 +259,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 placeholder={content.contactPage.form.companyPlaceholder}
-                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 transition-all outline-none"
+                className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 shadow-inner transition-all outline-none"
               />
             </div>
           </div>
 
-          {/* Services Multiselect */}
+          {/* Services 3D Multiselect */}
           <div className="space-y-3">
             <label className="block text-xs font-bold uppercase tracking-wider text-[#14171A]">
               {content.contactPage.form.servicesLabel}
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {content.services.map((service) => {
                 const isSelected = formData.services.includes(service.id);
                 return (
@@ -278,9 +277,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
                     key={service.id}
                     type="button"
                     onClick={() => toggleService(service.id)}
-                    className={`px-3.5 py-2 text-xs font-semibold rounded-xl border transition-all text-start cursor-pointer ${
+                    className={`px-4 py-2.5 text-xs font-bold rounded-xl border transition-all text-start cursor-pointer badge-3d ${
                       isSelected
-                        ? 'bg-[#0F4C3A] text-white border-[#0F4C3A] shadow-xs'
+                        ? 'bg-[#1E6B27] text-white border-[#1E6B27] shadow-md'
                         : 'bg-[#FAF9F5] border-[#EBE8DE] text-[#586069] hover:bg-[#FFF0F2] hover:text-[#FF3B53]'
                     }`}
                   >
@@ -321,7 +320,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder={content.contactPage.form.messagePlaceholder}
-              className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 transition-all outline-none resize-y"
+              className="w-full px-4 py-3 text-sm rounded-xl border border-[#EBE8DE] bg-[#FAF9F5] focus:bg-white focus:border-[#FF3B53] focus:ring-2 focus:ring-[#FF3B53]/20 shadow-inner transition-all outline-none resize-y"
             />
           </div>
 
@@ -332,7 +331,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ locale }) => {
               disabled={status === 'loading'}
               variant="primary"
               size="lg"
-              className="w-full justify-center"
+              className="w-full justify-center shadow-lg hover:shadow-xl hover:shadow-[#FF3B53]/35"
               icon={
                 status === 'loading' ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
