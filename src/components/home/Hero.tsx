@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { WatermelonMotif } from '@/components/ui/WatermelonMotif';
 import { siteContent, companyData } from '@/data/content';
 import { Locale } from '@/types/content';
 import { ArrowUpRight, Sparkles, CheckCircle2, Video, TrendingUp, Layers } from 'lucide-react';
@@ -102,14 +102,23 @@ export const Hero: React.FC<HeroProps> = ({ locale }) => {
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-md">
               {/* Central Premium Slate Card */}
-              <div className="relative rounded-3xl bg-white border border-[#EBE8DE] p-8 shadow-xl overflow-hidden card-hover-glow">
+              <div className="relative rounded-3xl bg-white border border-[#EBE8DE] p-8 sm:p-10 shadow-xl overflow-hidden card-hover-glow">
                 {/* Background decorative tint */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFF0F2] rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#EBF7F3] rounded-full blur-2xl pointer-events-none" />
 
-                {/* Animated Watermelon Centerpiece */}
+                {/* Centerpiece Official Logo Showcase */}
                 <div className="flex flex-col items-center text-center space-y-6">
-                  <WatermelonMotif size="hero" className="my-2" />
+                  <div className="relative w-64 sm:w-72 h-24 sm:h-28 flex items-center justify-center p-2">
+                    <Image
+                      src="/images/logo-transparent.png"
+                      alt="Marketing Melon Official Brand Logo"
+                      width={320}
+                      height={112}
+                      priority
+                      className="w-full h-auto object-contain drop-shadow-md"
+                    />
+                  </div>
 
                   <div className="space-y-2">
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF9F5] border border-[#EBE8DE] text-xs font-bold text-[#14171A]">

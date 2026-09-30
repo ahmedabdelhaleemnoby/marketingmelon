@@ -1,13 +1,12 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { siteContent, companyData } from '@/data/content';
 import { Locale } from '@/types/content';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { WatermelonMotif } from '@/components/ui/WatermelonMotif';
 import { CtaBanner } from '@/components/home/CtaBanner';
 import {
-  Compass,
   Video,
   ShieldCheck,
   CheckCircle2,
@@ -90,7 +89,16 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative p-8 rounded-3xl bg-white border border-[#EBE8DE] shadow-xl text-center space-y-6 max-w-sm w-full card-hover-glow">
-              <WatermelonMotif size="lg" className="mx-auto" />
+              <div className="relative w-full h-24 flex items-center justify-center">
+                <Image
+                  src="/images/logo-transparent.png"
+                  alt="Marketing Melon Official Brand Logo"
+                  width={280}
+                  height={98}
+                  priority
+                  className="w-auto h-full object-contain"
+                />
+              </div>
               <div className="space-y-1">
                 <div className="text-lg font-black text-[#14171A]">
                   Marketing Melon
@@ -204,7 +212,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <div className="p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm hover:border-[#10B981] transition-all card-hover-glow">
             <div className="flex items-center justify-between">
               <div className="w-12 h-12 rounded-2xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center">
-                <Phone className="w-6 h-6" />
+                <Phone className="w-5 h-5 text-[#0F4C3A]" />
               </div>
               <Badge variant="warning" size="sm">
                 {isRTL ? 'مصدر بيهانس (قيد المراجعة)' : 'Source: Behance'}
