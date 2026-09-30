@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-warm: #FAF9F5;
+    --bg-card: #FFFFFF;
+    --text-primary: #14171A;
+    --text-secondary: #586069;
+    --text-muted: #8C959F;
+    --coral-primary: #FF3B53;
+    --coral-hover: #E02840;
+    --coral-light: #FFF0F2;
+    --coral-glow: rgba(255, 59, 83, 0.15);
+    --emerald-primary: #0F4C3A;
+    --emerald-hover: #0A3629;
+    --emerald-light: #EBF7F3;
+    --mint-accent: #10B981;
+    --border-subtle: #EBE8DE;
+    --border-strong: #D6D2C4;
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-warm);
+    color: var(--text-primary);
+  }
+
+  body {
+    background-color: var(--bg-warm);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Watermelon Gradients & Utilities */
+.bg-warm-canvas {
+  background-color: #FAF9F5;
+}
+
+.bg-melon-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EBE8DE;
+}
+
+.text-melon-coral {
+  color: #FF3B53;
+}
+
+.bg-melon-coral {
+  background-color: #FF3B53;
+}
+
+.bg-melon-coral-light {
+  background-color: #FFF0F2;
+}
+
+.text-melon-emerald {
+  color: #0F4C3A;
+}
+
+.bg-melon-emerald {
+  background-color: #0F4C3A;
+}
+
+.bg-melon-emerald-light {
+  background-color: #EBF7F3;
+}
+
+.border-melon-coral {
+  border-color: #FF3B53;
+}
+
+.border-melon-emerald {
+  border-color: #0F4C3A;
+}
+
+/* Glassmorphism Navigation */
+.nav-glass {
+  background: rgba(250, 249, 245, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(235, 232, 222, 0.8);
+}
+
+/* Watermelon Seed Grid Pattern */
+.melon-grid-pattern {
+  background-image: radial-gradient(#FF3B53 0.75px, transparent 0.75px), radial-gradient(#0F4C3A 0.75px, #FAF9F5 0.75px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  opacity: 0.035;
+}
+
+/* Card Glow Effect */
+.card-hover-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(15, 76, 58, 0.08), 0 0 0 1px rgba(255, 59, 83, 0.2);
+}
+
+/* Selection Highlight */
+::selection {
+  background-color: #FF3B53;
+  color: #FFFFFF;
+}
+
+/* Accessible Focus Ring */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #FF3B53;
+  outline-offset: 2px;
+}
