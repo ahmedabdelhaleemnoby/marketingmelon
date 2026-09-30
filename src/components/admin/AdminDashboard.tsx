@@ -210,7 +210,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                 required
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                placeholder="Enter passcode (default: melon2026)"
                 className="w-full px-4 py-3 rounded-xl bg-[#22272E] border border-[#373E47] text-white text-sm focus:border-[#FF3B53] focus:ring-1 focus:ring-[#FF3B53] outline-none"
               />
             </div>

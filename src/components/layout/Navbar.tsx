@@ -56,6 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
     };
   }, [mobileMenuOpen]);
 
+  if (pathname?.includes('/admin')) {
+    return null;
+  }
+
   return (
     <>
       <header

@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { companyData, siteContent } from '@/data/content';
 import { Locale } from '@/types/content';
@@ -23,8 +26,13 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ locale }) => {
+  const pathname = usePathname();
   const content = siteContent[locale];
   const isRTL = locale === 'ar';
+
+  if (pathname?.includes('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="bg-[#0B1E19] text-white border-t border-[#143D32] relative overflow-hidden">
