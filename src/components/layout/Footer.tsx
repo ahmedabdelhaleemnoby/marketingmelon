@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { companyData, siteContent } from '@/data/content';
 import { Locale } from '@/types/content';
-import { Mail, Phone, MapPin, ArrowUpRight, Lock, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 import {
   FacebookIcon,
   LinkedInIcon,
@@ -187,14 +187,6 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
               <Heart className="w-3.5 h-3.5 text-[#FF3B53] fill-current" />
               <span>by Marketing Melon</span>
             </span>
-
-            <Link
-              href={`/${locale}/admin`}
-              className="inline-flex items-center gap-1 text-[11px] text-neutral-500 hover:text-neutral-300 px-2 py-1 rounded bg-neutral-900 border border-neutral-800"
-            >
-              <Lock className="w-3 h-3 text-[#FF3B53]" />
-              <span>Admin</span>
-            </Link>
           </div>
         </div>
       </div>
