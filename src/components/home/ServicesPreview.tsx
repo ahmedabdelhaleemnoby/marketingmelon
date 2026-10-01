@@ -1,169 +1,135 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { siteContent } from '@/data/content';
 import { Locale } from '@/types/content';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import {
-  Compass,
-  Share2,
-  TrendingUp,
-  Video,
-  Layout,
-  ArrowUpRight,
-  CheckCircle,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ServicesPreviewProps {
   locale: Locale;
 }
 
 export const ServicesPreview: React.FC<ServicesPreviewProps> = ({ locale }) => {
-  const content = siteContent[locale];
   const isRTL = locale === 'ar';
 
-  const iconMap: Record<string, React.ReactNode> = {
-    Compass: <Compass className="w-6 h-6" />,
-    Share2: <Share2 className="w-6 h-6" />,
-    TrendingUp: <TrendingUp className="w-6 h-6" />,
-    Video: <Video className="w-6 h-6" />,
-    Layout: <Layout className="w-6 h-6" />,
-  };
+  const cards = [
+    {
+      id: 'digital-marketing',
+      title: isRTL ? 'التسويق الرقمي' : 'Digital Marketing',
+      description: isRTL
+        ? 'حملات موجهة بالبيانات لتعزيز التفاعل وجذب العملاء وتحقيق أعلى عائد استثماري.'
+        : 'Data-driven campaigns that boost engagement, convert prospects, and maximize ROI.',
+      href: `/${locale}/services#paid-ads`,
+      glowBg: 'from-[#3A1C28] via-[#2A1520] to-[#14171A]',
+      accentGlow: 'bg-gradient-to-tr from-[#FF6B6B]/40 via-[#FF8E53]/30 to-transparent',
+    },
+    {
+      id: 'brand-identity',
+      title: isRTL ? 'الهوية البصرية' : 'Brand Identity',
+      description: isRTL
+        ? 'بناء هويات بصرية استثنائية وعميقة تترك انطباعاً دائماً لدى جمهورك المستهدف.'
+        : 'Crafting distinctive, memorable brand identities that resonate deeply with your audience.',
+      href: `/${locale}/services#strategy-marketing`,
+      glowBg: 'from-[#381822] via-[#241219] to-[#14171A]',
+      accentGlow: 'bg-gradient-to-bl from-[#FF3B53]/40 via-[#9A1F40]/30 to-transparent',
+    },
+    {
+      id: 'social-media',
+      title: isRTL ? 'إدارة التواصل' : 'Social Media',
+      description: isRTL
+        ? 'سرد قصصي إبداعي وإدارة مجتمعات متكاملة ومحتوى يخطف الأنظار عبر كافة المنصات.'
+        : 'Creative storytelling and active community management across all major platforms.',
+      href: `/${locale}/services#social-media`,
+      glowBg: 'from-[#1A263E] via-[#121A2C] to-[#14171A]',
+      accentGlow: 'bg-gradient-to-tr from-[#FF3B53]/35 via-[#3B82F6]/35 to-transparent',
+    },
+    {
+      id: 'web-development',
+      title: isRTL ? 'تطوير الويب' : 'Web Development',
+      description: isRTL
+        ? 'مواقع رقمية فائقة السرعة وتطبيقات مخصصة تقدم تجربة مستخدم استثنائية.'
+        : 'High-performance, bespoke web platforms engineered for seamless digital growth.',
+      href: `/${locale}/services#web-development`,
+      glowBg: 'from-[#151D3B] via-[#0E1428] to-[#14171A]',
+      accentGlow: 'bg-gradient-to-br from-[#3B82F6]/40 via-[#8B5CF6]/30 to-[#06B6D4]/30',
+    },
+  ];
 
   return (
-    <section className="py-20 sm:py-28 bg-[#FAF9F5] relative perspective-1000">
+    <section className="py-24 sm:py-32 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <Badge variant="emerald" size="md" className="badge-3d">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{content.servicesSection.eyebrow}</span>
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#14171A]">
-              {content.servicesSection.title}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Bold Headline & Context Copy */}
+          <div className="lg:col-span-5 space-y-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#14171A] leading-[1.12]">
+              {isRTL ? (
+                <>
+                  تمكين العلامات التجارية
+                  <br />
+                  من خلال <span className="text-[#FF3B53]">حلول مبتكرة</span>
+                  <br />
+                  وعصرية
+                </>
+              ) : (
+                <>
+                  Empowering
+                  <br />
+                  brands through
+                  <br />
+                  <span className="text-[#FF3B53]">innovative and</span>
+                  <br />
+                  modern solutions
+                </>
+              )}
             </h2>
-            <p className="text-sm sm:text-base text-[#586069] leading-relaxed">
-              {content.servicesSection.subtitle}
+
+            <p className="text-base sm:text-lg text-[#586069] leading-relaxed font-normal">
+              {isRTL
+                ? 'نحوّل الأفكار إلى واقع ملموس ونرتقي بعلامتك التجارية إلى المستوى التالي من خلال التصميم الاستراتيجي، الهوية البصرية، والإنتاج المرئي والتسويق الرقمي.'
+                : 'We shape ideas into reality and elevate your brand to the next level through strategic design, branding, high-impact media production, and digital marketing.'}
             </p>
+
+            <div className="pt-2">
+              <Link
+                href={`/${locale}/services`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#14171A] hover:text-[#FF3B53] transition-colors group"
+              >
+                <span>{isRTL ? 'استعرض كافة الخدمات' : 'Explore all capabilities'}</span>
+                <ArrowUpRight className={`w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+              </Link>
+            </div>
           </div>
 
-          <Button
-            href={`/${locale}/services`}
-            variant="outline"
-            size="md"
-            icon={
-              <ArrowUpRight
-                className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`}
-              />
-            }
-            className="self-start md:self-auto bg-white shadow-2xs hover:shadow-md"
-          >
-            {content.cta.allServices}
-          </Button>
-        </div>
-
-        {/* 5 Service Pillars 3D Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {content.services.map((service, index) => {
-            const isFeatured = index === 3; // Production & Motion & 3D
-
-            return (
-              <div
-                key={service.id}
-                className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between card-3d ${
-                  isFeatured
-                    ? 'bg-gradient-to-br from-[#1E6B27] via-[#14531D] to-[#0D3813] text-white shadow-2xl lg:col-span-2'
-                    : 'bg-white border border-[#EBE8DE] text-[#14171A] shadow-md hover:border-[#FF3B53]/40'
-                }`}
+          {/* Right Column: 2x2 Mesh Gradient Glow Cards */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+            {cards.map((card) => (
+              <Link
+                key={card.id}
+                href={card.href}
+                className={`group relative rounded-3xl p-7 sm:p-8 bg-gradient-to-b ${card.glowBg} text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[220px] border border-white/10`}
               >
-                <div>
-                  {/* Top Bar of Card */}
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <div
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${
-                        isFeatured
-                          ? 'bg-white/15 text-[#80ED99] border border-white/20'
-                          : 'bg-[#FFF0F2] text-[#FF3B53] border border-[#FF3B53]/20'
-                      }`}
-                    >
-                      {iconMap[service.iconName] || <Compass className="w-6 h-6 text-[#FF3B53]" />}
-                    </div>
-                    <Badge
-                      variant={isFeatured ? 'emerald' : 'charcoal'}
-                      size="sm"
-                      className={`badge-3d ${isFeatured ? 'bg-white/15 text-white border-white/25' : ''}`}
-                    >
-                      {service.highlightTag}
-                    </Badge>
-                  </div>
+                {/* Mesh Atmosphere Glow Overlay */}
+                <div
+                  className={`absolute inset-0 ${card.accentGlow} opacity-60 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none`}
+                />
 
-                  {/* Title & Description */}
-                  <h3
-                    className={`text-xl sm:text-2xl font-bold mb-3 ${
-                      isFeatured ? 'text-white' : 'text-[#14171A]'
-                    }`}
-                  >
-                    {service.title}
+                <div className="relative z-10 space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight group-hover:text-[#FFF] transition-colors">
+                    {card.title}
                   </h3>
-                  <p
-                    className={`text-sm leading-relaxed mb-6 ${
-                      isFeatured ? 'text-[#C7DBD4]' : 'text-[#586069]'
-                    }`}
-                  >
-                    {service.shortDescription}
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal opacity-90 group-hover:opacity-100 transition-opacity">
+                    {card.description}
                   </p>
+                </div>
 
-                  {/* Scope Checklist Chips */}
-                  <div className="space-y-2 mb-8">
-                    {service.scope.slice(0, 3).map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                        <CheckCircle
-                          className={`w-4 h-4 shrink-0 mt-0.5 ${
-                            isFeatured ? 'text-[#80ED99]' : 'text-[#1E6B27]'
-                          }`}
-                        />
-                        <span className={isFeatured ? 'text-[#EBF7F3]' : 'text-[#3E454F]'}>
-                          {item}
-                        </span>
-                      </div>
-                    ))}
+                <div className="relative z-10 pt-6 flex items-center justify-end">
+                  <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all duration-200">
+                    <ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
                   </div>
                 </div>
-
-                {/* Card Action Link */}
-                <div className="pt-4 border-t border-current/10 flex items-center justify-between">
-                  <Link
-                    href={`/${locale}/services#${service.id}`}
-                    className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold transition-all group ${
-                      isFeatured
-                        ? 'text-[#80ED99] hover:text-white'
-                        : 'text-[#FF3B53] hover:text-[#E02840]'
-                    }`}
-                  >
-                    <span>{locale === 'en' ? 'Learn More' : 'تفاصيل الخدمة'}</span>
-                    <ArrowUpRight
-                      className={`w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                        isRTL ? 'rotate-[-90deg]' : ''
-                      }`}
-                    />
-                  </Link>
-
-                  <Link
-                    href={`/${locale}/contact?service=${encodeURIComponent(service.id)}`}
-                    className={`text-xs font-semibold px-3.5 py-1.5 rounded-xl transition-all ${
-                      isFeatured
-                        ? 'bg-white/15 hover:bg-white/25 text-white border border-white/20'
-                        : 'bg-[#FAF9F5] hover:bg-[#FFF0F2] text-[#586069] hover:text-[#FF3B53] border border-[#EBE8DE]'
-                    }`}
-                  >
-                    {content.cta.talk}
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

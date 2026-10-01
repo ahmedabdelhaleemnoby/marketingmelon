@@ -1,9 +1,9 @@
-import React from 'react';
-import { siteContent } from '@/data/content';
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Locale } from '@/types/content';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { ProjectCard } from '@/components/work/ProjectCard';
 import { ArrowUpRight } from 'lucide-react';
 
 interface WorkPreviewProps {
@@ -11,72 +11,162 @@ interface WorkPreviewProps {
 }
 
 export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
-  const content = siteContent[locale];
   const isRTL = locale === 'ar';
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+
+  const categories = [
+    { id: 'all', label: isRTL ? 'عرض الكل' : 'View All' },
+    { id: 'branding', label: isRTL ? 'الهوية البصرية' : 'Branding' },
+    { id: 'social', label: isRTL ? 'سوشيال ميديا' : 'Social Media' },
+    { id: 'ads', label: isRTL ? 'إعلانات ممولة' : 'Performance Marketing' },
+    { id: 'photography', label: isRTL ? 'تصوير فوتوغرافي' : 'Photography' },
+    { id: 'videography', label: isRTL ? 'إنتاج سينمائي' : 'Videography' },
+    { id: 'web', label: isRTL ? 'تطوير الويب' : 'Web Development' },
+  ];
+
+  const showcases = [
+    {
+      id: 'al-eairy-residence',
+      slug: 'al-eairy-residence',
+      title: isRTL ? 'ريزيدنس العيري — Al Eairy Residence' : 'Al Eairy Residence',
+      category: isRTL ? 'إنتاج سينمائي وتصوير ضيافة' : 'Hospitality Cinematography & Media',
+      categoryKey: 'videography',
+      image: '/images/hero-3d-banner.png',
+      badge: isRTL ? 'مشروع موثق' : 'Verified Project',
+      accentColor: 'from-amber-600 via-rose-800 to-black',
+    },
+    {
+      id: 'melon-brand-system',
+      slug: 'al-eairy-residence',
+      title: isRTL ? 'هوية ماركتنج ميلون الثلاثية الأبعاد' : 'Marketing Melon 3D Brand System',
+      category: isRTL ? 'هوية بصرية وموشن 3D' : 'Brand Identity & 3D Spatial Motion',
+      categoryKey: 'branding',
+      image: '/images/mascots-3d-transparent.png',
+      badge: isRTL ? 'هوية الوكالة' : 'Agency Identity',
+      accentColor: 'from-[#0037FF] via-[#001EC4] to-[#0A0E2A]',
+      isGraphicCard: true,
+    },
+  ];
+
+  const filteredShowcases =
+    activeCategory === 'all'
+      ? showcases
+      : showcases.filter(
+          (item) => item.categoryKey === activeCategory || activeCategory === 'all'
+        );
 
   return (
-    <section className="py-20 sm:py-28 bg-[#F3EFE6]/60 border-y border-[#EBE8DE] relative">
+    <section className="py-24 sm:py-32 bg-[#FAF9F5] border-t border-[#EBE8DE] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <Badge variant="coral" size="md">
-              {content.workSection.eyebrow}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#14171A]">
-              {content.workSection.title}
-            </h2>
-            <p className="text-sm sm:text-base text-[#586069] leading-relaxed">
-              {content.workSection.subtitle}
-            </p>
-          </div>
-
-          <Button
-            href={`/${locale}/work`}
-            variant="outline"
-            size="md"
-            icon={
-              <ArrowUpRight
-                className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`}
-              />
-            }
-            className="self-start md:self-auto bg-white"
-          >
-            {content.cta.allWork}
-          </Button>
+        {/* Section Headline (ROAR Style) */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#14171A] leading-[1.15]">
+            {isRTL ? (
+              <>الإبداع مسألة منظور.. واعتزازنا بما نقدمه حقيقة راسخة</>
+            ) : (
+              <>Creativity is a matter of perspective. Our pride is a certain</>
+            )}
+          </h2>
         </div>
 
-        {/* Projects Showcase Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {content.projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} locale={locale} />
-          ))}
+        {/* Category Filter Pills (ROAR Style Horizontal Bar) */}
+        <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-14">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
 
-          {/* Transparent Scope Card (Highlighting Verified Client Inquiries) */}
-          <div className="rounded-3xl border-2 border-dashed border-[#D6D2C4] bg-[#FAF9F5]/80 p-8 flex flex-col justify-between text-center items-center">
-            <div className="space-y-4 my-auto">
-              <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] text-[#FF3B53] flex items-center justify-center mx-auto">
-                <ArrowUpRight className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-[#14171A]">
-                {isRTL ? 'هل لديك مشروع قادم؟' : 'Have a Project in Mind?'}
-              </h3>
-              <p className="text-xs sm:text-sm text-[#586069] max-w-xs mx-auto leading-relaxed">
-                {isRTL
-                  ? 'نوفر حلول تصوير متكاملة، إعلانات موجهة، وهندسة برمجية مخصصة لعلامتك.'
-                  : 'Let’s discuss custom production, targeted growth campaigns, and high-performance digital presence.'}
-              </p>
-            </div>
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer shadow-2xs ${
+                  isActive
+                    ? 'bg-black text-white shadow-md scale-105'
+                    : 'bg-white border border-[#EBE8DE] text-[#586069] hover:text-black hover:bg-[#F3EFE6]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
 
-            <Button
-              href={`/${locale}/contact`}
-              variant="secondary"
-              size="md"
-              className="w-full justify-center mt-6"
+        {/* 2-Column Showcases Grid (ROAR Style) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {filteredShowcases.map((item) => (
+            <Link
+              key={item.id}
+              href={`/${locale}/work/${item.slug}`}
+              className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-[#EBE8DE] flex flex-col justify-between"
             >
-              {content.cta.talk}
-            </Button>
-          </div>
+              {/* Media Visual Container */}
+              <div
+                className={`relative w-full h-80 sm:h-96 overflow-hidden flex items-center justify-center ${
+                  item.isGraphicCard
+                    ? 'bg-gradient-to-br from-[#0037FF] via-[#0522B0] to-[#04115C] p-8'
+                    : 'bg-neutral-900'
+                }`}
+              >
+                {item.isGraphicCard ? (
+                  <div className="relative w-full h-full flex flex-col items-center justify-center text-center">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 relative mb-4 transform group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.4)]"
+                      />
+                    </div>
+                    <div className="text-white font-black text-xl sm:text-2xl tracking-widest uppercase">
+                      Marketing Melon
+                    </div>
+                  </div>
+                ) : (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+
+                {/* Top Badge */}
+                <div className="absolute top-5 left-5 z-10">
+                  <span className="px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-black font-bold text-xs shadow-sm">
+                    {item.badge}
+                  </span>
+                </div>
+
+                {/* Floating Arrow Trigger */}
+                <div className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-black/60 group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all duration-300">
+                  <ArrowUpRight className={`w-5 h-5 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                </div>
+              </div>
+
+              {/* Card Meta Content */}
+              <div className="p-6 sm:p-8 bg-white space-y-2">
+                <div className="text-xs font-bold text-[#FF3B53] uppercase tracking-wider">
+                  {item.category}
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-[#14171A] group-hover:text-[#FF3B53] transition-colors">
+                  {item.title}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Bottom Explore More CTA */}
+        <div className="mt-14 text-center">
+          <Link
+            href={`/${locale}/work`}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-black text-white font-bold text-sm hover:bg-neutral-800 transition-all shadow-md active:scale-95"
+          >
+            <span>{isRTL ? 'استكشف جميع الأعمال والمشاريع' : 'Browse Full Portfolio'}</span>
+            <ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+          </Link>
         </div>
       </div>
     </section>
