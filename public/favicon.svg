@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14171A" />
+      <stop offset="100%" stop-color="#05080A" />
+    </linearGradient>
+    <linearGradient id="rindGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15803D" />
+      <stop offset="50%" stop-color="#0F4C3A" />
+      <stop offset="100%" stop-color="#06281E" />
+    </linearGradient>
+    <linearGradient id="innerRind" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8F2C2" />
+      <stop offset="100%" stop-color="#80ED99" />
+    </linearGradient>
+    <linearGradient id="fleshGrad" x1="0%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FF5C72" />
+      <stop offset="50%" stop-color="#FF3B53" />
+      <stop offset="100%" stop-color="#D91B33" />
+    </linearGradient>
+    <linearGradient id="glossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Dark Rounded Squircle App Tile -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+  <rect width="508" height="508" x="2" y="2" rx="126" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="3" />
+
+  <!-- 3D Watermelon Slice Emblem -->
+  <g transform="translate(0, 10)" filter="url(#dropShadow)">
+    <!-- Outer Green Rind Arc -->
+    <path d="M 96 180 A 180 180 0 0 0 416 180 Z" fill="url(#rindGrad)" />
+    
+    <!-- Light Green / White Inner Rind Layer -->
+    <path d="M 112 180 A 164 164 0 0 0 400 180 Z" fill="url(#innerRind)" />
+    
+    <!-- Red Juicy Watermelon Flesh -->
+    <path d="M 124 180 A 152 152 0 0 0 388 180 Z" fill="url(#fleshGrad)" />
+
+    <!-- Glossy Upper Highlight Arc -->
+    <path d="M 124 180 A 152 152 0 0 0 388 180 Q 256 160 124 180 Z" fill="url(#glossGrad)" opacity="0.8" />
+
+    <!-- Sleek Seeds -->
+    <!-- Center Seed -->
+    <path d="M 256 240 C 251 247 248 256 256 264 C 264 256 261 247 256 240 Z" fill="#14171A" transform="scale(1.3) translate(-59, -55)" />
+    <!-- Left Seed -->
+    <path d="M 200 215 C 195 222 192 231 200 239 C 208 231 205 222 200 215 Z" fill="#14171A" transform="rotate(-20 200 227) scale(1.2) translate(-33, -36)" />
+    <!-- Right Seed -->
+    <path d="M 312 215 C 307 222 304 231 312 239 C 320 231 317 222 312 215 Z" fill="#14171A" transform="rotate(20 312 227) scale(1.2) translate(-52, -36)" />
+    <!-- Bottom Left Seed -->
+    <path d="M 226 270 C 221 277 218 285 226 292 C 234 285 231 277 226 270 Z" fill="#14171A" transform="rotate(-10 226 281) scale(1.1) translate(-20, -26)" />
+    <!-- Bottom Right Seed -->
+    <path d="M 286 270 C 281 277 278 285 286 292 C 294 285 291 277 286 270 Z" fill="#14171A" transform="rotate(10 286 281) scale(1.1) translate(-26, -26)" />
+  </g>
+</svg>
