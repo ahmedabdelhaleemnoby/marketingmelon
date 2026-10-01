@@ -18,6 +18,7 @@ import {
   LinkedInIcon,
   InstagramIcon,
   BehanceIcon,
+  TikTokIcon,
 } from '@/components/ui/SocialIcons';
 
 interface ContactPageProps {
@@ -96,75 +97,87 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
           {/* Direct Communication Channels Column */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Cairo Verified Contact Box */}
-            <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-8 shadow-sm space-y-4 hover:border-[#10B981] transition-all card-hover-glow">
+            {/* Saudi Arabia Office Card (ROAR Style) */}
+            <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-8 shadow-sm space-y-4 hover:border-black/30 transition-all card-hover-glow">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5 text-[#0F4C3A]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F5F4F0] text-black flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-black" />
                 </div>
                 <Badge variant="emerald" size="sm">
-                  {isRTL ? 'مكتب القاهرة (موثق)' : 'Cairo Office (Verified)'}
+                  {isRTL ? 'مكتب السعودية (الرياض)' : 'Saudi Office (Riyadh)'}
                 </Badge>
               </div>
 
               <div>
                 <h3 className="text-lg font-bold text-[#14171A]">
-                  {isRTL ? 'فرع جمهورية مصر العربية' : 'Egypt Operations & Studio'}
+                  {isRTL ? 'مكتب المملكة العربية السعودية' : 'Saudi Arabia Office'}
                 </h3>
-                <p className="text-xs text-[#586069] mt-1">
-                  {companyData.phones.cairo.note}
+                <p className="text-xs text-[#586069] mt-1 font-medium">
+                  {isRTL ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia'}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-[#EBE8DE] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="font-mono text-sm font-bold text-[#0F4C3A]">
-                  {companyData.phones.cairo.display}
+              <div className="pt-2 border-t border-[#EBE8DE] space-y-2 font-mono">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold text-[#14171A]">+966 054 785 1570</span>
+                  <a
+                    href={companyData.phones.saudi.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-sans font-bold px-3 py-1 rounded-full bg-black text-white hover:bg-neutral-800 transition-colors"
+                  >
+                    <span>{isRTL ? 'واتساب' : 'WhatsApp'}</span>
+                    <ArrowUpRight className={`w-3 h-3 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                  </a>
                 </div>
-                <Button
-                  href={companyData.phones.cairo.whatsappUrl}
-                  isExternal
-                  variant="secondary"
-                  size="sm"
-                  icon={<ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />}
-                >
-                  {isRTL ? 'واتساب القاهرة' : 'WhatsApp Cairo'}
-                </Button>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold text-[#14171A]">+966 50 925 1351</span>
+                  <a
+                    href={companyData.phones.saudi.secondaryWhatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-sans font-bold px-3 py-1 rounded-full bg-[#F5F4F0] text-black hover:bg-black hover:text-white transition-colors"
+                  >
+                    <span>{isRTL ? 'واتساب ٢' : 'WhatsApp 2'}</span>
+                    <ArrowUpRight className={`w-3 h-3 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Saudi Arabia Contact Box */}
-            <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-8 shadow-sm space-y-4 hover:border-[#10B981] transition-all card-hover-glow">
+            {/* Egypt Office Card (ROAR Style) */}
+            <div className="rounded-3xl bg-white border border-[#EBE8DE] p-6 sm:p-8 shadow-sm space-y-4 hover:border-black/30 transition-all card-hover-glow">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-[#0F4C3A]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F5F4F0] text-black flex items-center justify-center">
+                  <MessageSquare className="w-5 h-5 text-black" />
                 </div>
-                <Badge variant="warning" size="sm">
-                  {isRTL ? 'مصدر بيهانس (قيد المراجعة)' : 'Source: Behance (Flagged)'}
+                <Badge variant="emerald" size="sm">
+                  {isRTL ? 'مكتب مصر (حدائق الأهرام)' : 'Egypt Office (Giza)'}
                 </Badge>
               </div>
 
               <div>
                 <h3 className="text-lg font-bold text-[#14171A]">
-                  {isRTL ? 'خط المملكة العربية السعودية' : 'Saudi Arabia Line'}
+                  {isRTL ? 'مكتب جمهورية مصر العربية' : 'Egypt Office'}
                 </h3>
-                <p className="text-xs text-[#586069] mt-1">
-                  {companyData.phones.saudi.note}
+                <p className="text-xs text-[#586069] mt-1 font-medium">
+                  {isRTL ? 'حدائق الأهرام، الجيزة' : 'Hadayek al-ahram , Giza'}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-[#EBE8DE] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="font-mono text-sm font-bold text-[#0F4C3A]">
-                  {companyData.phones.saudi.display}
+              <div className="pt-2 border-t border-[#EBE8DE] flex items-center justify-between gap-3">
+                <div className="font-mono text-sm font-bold text-[#14171A]">
+                  01150117387
                 </div>
-                <Button
-                  href={companyData.phones.saudi.whatsappUrl}
-                  isExternal
-                  variant="secondary"
-                  size="sm"
-                  icon={<ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />}
+                <a
+                  href={companyData.phones.cairo.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-sans font-bold px-3.5 py-1.5 rounded-full bg-black text-white hover:bg-neutral-800 transition-colors"
                 >
-                  {isRTL ? 'واتساب المملكة' : 'WhatsApp Saudi'}
-                </Button>
+                  <span>{isRTL ? 'واتساب مصر' : 'WhatsApp Egypt'}</span>
+                  <ArrowUpRight className={`w-3 h-3 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                </a>
               </div>
             </div>
 
@@ -203,7 +216,17 @@ export default async function ContactPage({ params }: ContactPageProps) {
                 <span className="text-xs text-[#80ED99] font-bold">100% Verified</span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                <a
+                  href={companyData.socialLinks.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-[#FF3B53] hover:border-[#FF3B53] transition-colors text-xs font-semibold"
+                >
+                  <TikTokIcon className="w-4 h-4" />
+                  <span>TikTok</span>
+                </a>
+
                 <a
                   href={companyData.socialLinks.linkedin}
                   target="_blank"
@@ -246,6 +269,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

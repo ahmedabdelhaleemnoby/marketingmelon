@@ -6,19 +6,13 @@ import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { companyData, siteContent } from '@/data/content';
 import { Locale } from '@/types/content';
-import {
-  Mail,
-  Phone,
-  MessageSquare,
-  ArrowUpRight,
-  ShieldCheck,
-  Lock,
-} from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, Lock, Heart } from 'lucide-react';
 import {
   FacebookIcon,
   LinkedInIcon,
   InstagramIcon,
   BehanceIcon,
+  TikTokIcon,
 } from '@/components/ui/SocialIcons';
 
 interface FooterProps {
@@ -35,188 +29,171 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
   }
 
   return (
-    <footer className="bg-[#0B1E19] text-white border-t border-[#143D32] relative overflow-hidden">
-      {/* Decorative ambient background melon lights */}
+    <footer className="bg-black text-white relative overflow-hidden border-t border-neutral-900">
+      {/* Ambient background glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF3B53]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#0F4C3A]/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#1E6B27]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Main Footer Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-[#1A453A]">
-          {/* Brand Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-5">
-            <Logo locale={locale} variant="dark" />
-            <p className="text-sm sm:text-base text-[#B0C4BE] max-w-md leading-relaxed">
-              {content.footer.description}
-            </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#13382F] border border-[#215749] text-xs font-semibold text-[#80ED99]">
-              <span className="w-2 h-2 rounded-full bg-[#FF3B53] animate-pulse" />
-              <span>“{companyData.tagline}”</span>
-            </div>
+      {/* Main ROAR Style Footer Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 relative z-10">
+        {/* Massive Bold Callout & Socials (ROAR Style) */}
+        <div className="space-y-8 max-w-4xl">
+          {/* Main Headline */}
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
+            {isRTL ? (
+              <>لا تنتظر — لنجعل علامتك التجارية تتصدر وتتألق</>
+            ) : (
+              <>Don&apos;t wait — Let&apos;s make your brand shine</>
+            )}
+          </h2>
 
-            {/* Social Channels */}
-            <div className="pt-2">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#79998F] mb-3">
-                {isRTL ? 'قنواتنا الرسمية' : 'Verified Social Profiles'}
-              </div>
-              <div className="flex items-center gap-2.5">
-                <a
-                  href={companyData.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-[#143D32] border border-[#235C4C] flex items-center justify-center text-[#B0C4BE] hover:text-white hover:bg-[#FF3B53] hover:border-[#FF3B53] transition-all"
-                  aria-label="Marketing Melon LinkedIn"
-                >
-                  <LinkedInIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href={companyData.socialLinks.behance}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-[#143D32] border border-[#235C4C] flex items-center justify-center text-[#B0C4BE] hover:text-white hover:bg-[#FF3B53] hover:border-[#FF3B53] transition-all"
-                  aria-label="Marketing Melon Behance"
-                >
-                  <BehanceIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href={companyData.socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-[#143D32] border border-[#235C4C] flex items-center justify-center text-[#B0C4BE] hover:text-white hover:bg-[#FF3B53] hover:border-[#FF3B53] transition-all"
-                  aria-label="Marketing Melon Instagram"
-                >
-                  <InstagramIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href={companyData.socialLinks.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-[#143D32] border border-[#235C4C] flex items-center justify-center text-[#B0C4BE] hover:text-white hover:bg-[#FF3B53] hover:border-[#FF3B53] transition-all"
-                  aria-label="Marketing Melon Facebook"
-                >
-                  <FacebookIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
+          {/* Subtitle */}
+          <p className="text-base sm:text-xl text-neutral-400 max-w-2xl leading-relaxed">
+            {isRTL
+              ? 'ابق على اتصال وتابعنا على منصات التواصل الاجتماعي لمعرفة أحدث التحديثات والأعمال.'
+              : 'Stay connected and follow us on social media for the latest updates and case studies.'}
+          </p>
+
+          {/* Support Email */}
+          <div className="pt-2">
+            <a
+              href={`mailto:${companyData.emails.primary}`}
+              className="text-xl sm:text-2xl lg:text-3xl font-bold text-white hover:text-[#FF3B53] transition-colors inline-flex items-center gap-3 group"
+            >
+              <span>{companyData.emails.primary}</span>
+              <ArrowUpRight className="w-6 h-6 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+            </a>
           </div>
 
-          {/* Quick Navigation (2 cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white">
-              {content.footer.quickLinks}
-            </h3>
-            <ul className="space-y-2.5">
-              {content.nav.map((item) => (
-                <li key={item.key}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-[#B0C4BE] hover:text-[#FF3B53] transition-colors inline-flex items-center gap-1 group"
-                  >
-                    <span>{item.label}</span>
-                    <ArrowUpRight
-                      className={`w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity ${
-                        isRTL ? 'rotate-[-90deg]' : ''
-                      }`}
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Circular Social Pill Badges Row (ROAR Style: TikTok, Behance, LinkedIn, Instagram, Facebook) */}
+          <div className="pt-4 flex flex-wrap items-center gap-3">
+            <a
+              href={companyData.socialLinks.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FF3B53] hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="TikTok"
+            >
+              <TikTokIcon className="w-5 h-5" />
+            </a>
 
-          {/* Core Services (2 cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white">
-              {content.footer.servicesTitle}
-            </h3>
-            <ul className="space-y-2.5 text-sm text-[#B0C4BE]">
-              {content.services.slice(0, 4).map((s) => (
-                <li key={s.id}>
-                  <Link
-                    href={`/${locale}/services#${s.id}`}
-                    className="hover:text-[#FF3B53] transition-colors line-clamp-1"
-                  >
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <a
+              href={companyData.socialLinks.behance}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FF3B53] hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="Behance"
+            >
+              <BehanceIcon className="w-5 h-5" />
+            </a>
 
-          {/* Direct Regional Inquiries (3 cols) */}
-          <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white">
-              {content.footer.contactTitle}
-            </h3>
+            <a
+              href={companyData.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FF3B53] hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon className="w-5 h-5" />
+            </a>
 
-            {/* Emails */}
-            <div className="space-y-2 text-xs">
-              <a
-                href={`mailto:${companyData.emails.primary}`}
-                className="flex items-center gap-2 text-[#B0C4BE] hover:text-white transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5 text-[#FF3B53] shrink-0" />
-                <span>{companyData.emails.primary}</span>
-              </a>
-              <a
-                href={`mailto:${companyData.emails.secondary}`}
-                className="flex items-center gap-2 text-[#8CA59E] hover:text-white transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5 text-[#8CA59E] shrink-0" />
-                <span>{companyData.emails.secondary}</span>
-              </a>
-            </div>
+            <a
+              href={companyData.socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FF3B53] hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="Instagram"
+            >
+              <InstagramIcon className="w-5 h-5" />
+            </a>
 
-            {/* Cairo Phone */}
-            <div className="pt-2 border-t border-[#1A453A]/60">
-              <div className="text-[11px] font-semibold text-[#80ED99] uppercase tracking-wider mb-1">
-                {isRTL ? 'القاهرة، مصر' : 'Cairo, Egypt'}
-              </div>
-              <a
-                href={companyData.phones.cairo.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs text-white hover:text-[#80ED99] font-mono"
-              >
-                <MessageSquare className="w-3.5 h-3.5 text-[#10B981]" />
-                <span dir="ltr">{companyData.phones.cairo.display}</span>
-              </a>
-            </div>
-
-            {/* Saudi Phone */}
-            <div className="pt-2 border-t border-[#1A453A]/60">
-              <div className="text-[11px] font-semibold text-[#80ED99] uppercase tracking-wider mb-1">
-                {isRTL ? 'المملكة العربية السعودية' : 'Saudi Arabia'}
-              </div>
-              <a
-                href={companyData.phones.saudi.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs text-white hover:text-[#80ED99] font-mono"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#10B981]" />
-                <span dir="ltr">{companyData.phones.saudi.display}</span>
-              </a>
-            </div>
+            <a
+              href={companyData.socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FF3B53] hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="Facebook"
+            >
+              <FacebookIcon className="w-5 h-5" />
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright, Verified Fact Seal, and Admin Entry */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#79998F]">
-          <div className="flex items-center gap-2 text-center sm:text-start">
-            <ShieldCheck className="w-4 h-4 text-[#80ED99] shrink-0" />
-            <span>{content.footer.disclaimer}</span>
+        {/* Regional Offices Quick Bar in Footer */}
+        <div className="mt-16 pt-12 border-t border-neutral-800/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Saudi Arabia Office Info */}
+          <div className="space-y-2">
+            <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+              {isRTL ? 'مكتب المملكة العربية السعودية' : 'Saudi Arabia Office'}
+            </div>
+            <div className="text-sm font-semibold text-white">
+              {isRTL ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia'}
+            </div>
+            <div className="font-mono text-xs text-neutral-300 space-y-1" dir="ltr">
+              <div>+966 054 785 1570</div>
+              <div>+966 50 925 1351</div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4 text-center sm:text-end">
-            <span>© {new Date().getFullYear()} {companyData.name}. {content.footer.rights}</span>
+          {/* Egypt Office Info */}
+          <div className="space-y-2">
+            <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+              {isRTL ? 'مكتب جمهورية مصر العربية' : 'Egypt Office'}
+            </div>
+            <div className="text-sm font-semibold text-white">
+              {isRTL ? 'حدائق الأهرام، الجيزة' : 'Hadayek al-ahram , Giza'}
+            </div>
+            <div className="font-mono text-xs text-neutral-300" dir="ltr">
+              01150117387
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="space-y-2">
+            <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+              {content.footer.quickLinks}
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-300">
+              {content.nav.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className="hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Brand Vision */}
+          <div className="space-y-2">
+            <Logo locale={locale} variant="dark" />
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              {companyData.tagline}
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Credit */}
+        <div className="mt-12 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+          <div>
+            {new Date().getFullYear()} © {companyData.name}. {content.footer.rights}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5">
+              <span>Made with</span>
+              <Heart className="w-3.5 h-3.5 text-[#FF3B53] fill-current" />
+              <span>by Marketing Melon</span>
+            </span>
+
             <Link
               href={`/${locale}/admin`}
-              className="inline-flex items-center gap-1 text-[11px] text-[#79998F] hover:text-white px-2 py-1 rounded bg-[#13382F] border border-[#215749]"
-              title="Admin Control Panel"
+              className="inline-flex items-center gap-1 text-[11px] text-neutral-500 hover:text-neutral-300 px-2 py-1 rounded bg-neutral-900 border border-neutral-800"
             >
               <Lock className="w-3 h-3 text-[#FF3B53]" />
-              <span>CMS Admin</span>
+              <span>Admin</span>
             </Link>
           </div>
         </div>

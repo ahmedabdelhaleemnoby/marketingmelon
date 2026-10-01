@@ -172,14 +172,62 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Cairo Office Card */}
-          <div className="p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm hover:border-[#10B981] transition-all card-hover-glow">
+          {/* Saudi Office Card */}
+          <div className="p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm hover:border-black/30 transition-all card-hover-glow">
             <div className="flex items-center justify-between">
-              <div className="w-12 h-12 rounded-2xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#F5F4F0] text-black flex items-center justify-center">
+                <Phone className="w-6 h-6" />
+              </div>
+              <Badge variant="emerald" size="sm">
+                {isRTL ? 'الرياض (المملكة العربية السعودية)' : 'Riyadh (Saudi Arabia)'}
+              </Badge>
+            </div>
+
+            <div>
+              <div className="text-xs font-bold text-[#8C959F] uppercase tracking-wider">
+                {content.about.regionalPresence.saudi.country}
+              </div>
+              <h3 className="text-2xl font-black text-[#14171A] mt-1">
+                {content.about.regionalPresence.saudi.city}
+              </h3>
+            </div>
+
+            <div className="pt-4 border-t border-[#EBE8DE] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-sm font-bold text-[#14171A]">+966 054 785 1570</span>
+                <a
+                  href={companyData.phones.saudi.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-black text-white hover:bg-neutral-800 transition-colors"
+                >
+                  <span>{isRTL ? 'واتساب ١' : 'WhatsApp 1'}</span>
+                  <ArrowUpRight className={`w-3 h-3 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                </a>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-sm font-bold text-[#14171A]">+966 50 925 1351</span>
+                <a
+                  href={companyData.phones.saudi.secondaryWhatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-[#F5F4F0] text-black hover:bg-black hover:text-white transition-colors"
+                >
+                  <span>{isRTL ? 'واتساب ٢' : 'WhatsApp 2'}</span>
+                  <ArrowUpRight className={`w-3 h-3 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Cairo / Giza Office Card */}
+          <div className="p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm hover:border-black/30 transition-all card-hover-glow">
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-[#F5F4F0] text-black flex items-center justify-center">
                 <MessageSquare className="w-6 h-6" />
               </div>
               <Badge variant="emerald" size="sm">
-                {content.about.regionalPresence.cairo.status}
+                {isRTL ? 'حدائق الأهرام (مصر)' : 'Hadayek al-Ahram (Egypt)'}
               </Badge>
             </div>
 
@@ -193,49 +241,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
             </div>
 
             <div className="pt-4 border-t border-[#EBE8DE] flex items-center justify-between">
-              <div className="font-mono text-base font-bold text-[#0F4C3A]">
-                {companyData.phones.cairo.display}
+              <div className="font-mono text-base font-bold text-[#14171A]">
+                01150117387
               </div>
               <Button
                 href={companyData.phones.cairo.whatsappUrl}
                 isExternal
-                variant="secondary"
-                size="sm"
-                icon={<ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />}
-              >
-                {content.cta.directChat}
-              </Button>
-            </div>
-          </div>
-
-          {/* Saudi Office Card */}
-          <div className="p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm hover:border-[#10B981] transition-all card-hover-glow">
-            <div className="flex items-center justify-between">
-              <div className="w-12 h-12 rounded-2xl bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center">
-                <Phone className="w-5 h-5 text-[#0F4C3A]" />
-              </div>
-              <Badge variant="warning" size="sm">
-                {isRTL ? 'مصدر بيهانس (قيد المراجعة)' : 'Source: Behance'}
-              </Badge>
-            </div>
-
-            <div>
-              <div className="text-xs font-bold text-[#8C959F] uppercase tracking-wider">
-                {content.about.regionalPresence.saudi.country}
-              </div>
-              <h3 className="text-2xl font-black text-[#14171A] mt-1">
-                {content.about.regionalPresence.saudi.city}
-              </h3>
-            </div>
-
-            <div className="pt-4 border-t border-[#EBE8DE] flex items-center justify-between">
-              <div className="font-mono text-base font-bold text-[#0F4C3A]">
-                {companyData.phones.saudi.display}
-              </div>
-              <Button
-                href={companyData.phones.saudi.whatsappUrl}
-                isExternal
-                variant="secondary"
+                variant="primary"
                 size="sm"
                 icon={<ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />}
               >

@@ -61,12 +61,19 @@ export interface CompanyInfo {
       display: string;
       raw: string;
       whatsappUrl: string;
+      address?: string;
+      addressAr?: string;
       note?: string;
     };
     saudi: {
       display: string;
       raw: string;
+      secondaryDisplay?: string;
+      secondaryRaw?: string;
       whatsappUrl: string;
+      secondaryWhatsappUrl?: string;
+      address?: string;
+      addressAr?: string;
       note?: string;
     };
   };
@@ -75,5 +82,7 @@ export interface CompanyInfo {
     linkedin: string;
     instagram: string;
     behance: string;
+    tiktok?: string;
   };
 }
+

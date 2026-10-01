@@ -4,17 +4,23 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
-import { Button } from '@/components/ui/Button';
 import { siteContent, companyData } from '@/data/content';
 import { Locale } from '@/types/content';
-import { Menu, X, Globe, ArrowUpRight, Phone, MessageSquare } from 'lucide-react';
+import { X, ArrowUpRight, Phone, MessageSquare, MapPin } from 'lucide-react';
+import {
+  FacebookIcon,
+  LinkedInIcon,
+  InstagramIcon,
+  BehanceIcon,
+  TikTokIcon,
+} from '@/components/ui/SocialIcons';
 
 interface NavbarProps {
   locale: Locale;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const content = siteContent[locale];
@@ -39,14 +45,14 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when pathname changes
+  // Close drawer on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
+    setDrawerOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when drawer is open
   useEffect(() => {
-    if (mobileMenuOpen) {
+    if (drawerOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -54,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [mobileMenuOpen]);
+  }, [drawerOpen]);
 
   if (pathname?.includes('/admin')) {
     return null;
@@ -65,18 +71,18 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'nav-glass shadow-xs py-3'
-            : 'bg-[#FAF9F5]/90 backdrop-blur-xs py-4 sm:py-5'
+            ? 'bg-white/95 backdrop-blur-md shadow-xs py-3.5'
+            : 'bg-[#FAF9F5]/90 backdrop-blur-xs py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Brand Logo */}
+            {/* Brand Logo (Left) */}
             <Logo locale={locale} />
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Center Navigation Links */}
             <nav
-              className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-[#EBE8DE] shadow-2xs"
+              className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-[#EBE8DE] shadow-2xs"
               aria-label="Main Navigation"
             >
               {content.nav.map((item) => {
@@ -88,10 +94,10 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
                   <Link
                     key={item.key}
                     href={item.href}
-                    className={`px-3.5 py-1.5 text-sm font-semibold rounded-full transition-all duration-200 ${
+                    className={`px-4 py-1.5 text-sm font-semibold rounded-full transition-all duration-200 ${
                       isActive
-                        ? 'bg-[#14171A] text-white shadow-2xs'
-                        : 'text-[#586069] hover:text-[#14171A] hover:bg-[#FAF9F5]'
+                        ? 'bg-black text-white shadow-2xs'
+                        : 'text-[#586069] hover:text-black hover:bg-[#FAF9F5]'
                     }`}
                   >
                     {item.label}
@@ -100,50 +106,41 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
               })}
             </nav>
 
-            {/* Action Buttons & Language Switcher */}
-            <div className="hidden md:flex items-center gap-3">
-              {/* Language Switcher */}
+            {/* Right Controls: Circular Lang Toggle & Sleek Hamburger Trigger (ROAR Style) */}
+            <div className="flex items-center gap-3">
+              {/* Circular Language Switcher (ROAR Style: ع or EN) */}
               <Link
                 href={getSwitchLocalePath(otherLocale)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border border-[#EBE8DE] bg-white text-[#14171A] hover:bg-[#FFF0F2] hover:border-[#FF3B53]/30 hover:text-[#FF3B53] transition-colors"
+                className="w-10 h-10 rounded-full bg-[#F5F4F0] border border-[#EBE8DE] text-black hover:bg-black hover:text-white flex items-center justify-center font-bold text-sm transition-all duration-200 shadow-2xs active:scale-95"
                 aria-label={`Switch to ${otherLocale === 'ar' ? 'Arabic' : 'English'}`}
               >
-                <Globe className="w-3.5 h-3.5 text-[#FF3B53]" />
-                <span>{locale === 'en' ? 'العربية' : 'English'}</span>
+                <span>{locale === 'en' ? 'ع' : 'EN'}</span>
               </Link>
 
-              {/* Primary Contact CTA */}
-              <Button
-                href={`/${locale}/contact`}
-                variant="primary"
-                size="sm"
-                icon={<ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />}
-              >
-                {content.cta.talk}
-              </Button>
-            </div>
-
-            {/* Mobile Menu Trigger & Language Button */}
-            <div className="flex md:hidden items-center gap-2">
+              {/* Desktop Direct CTA Button (Black Pill) */}
               <Link
-                href={getSwitchLocalePath(otherLocale)}
-                className="px-2.5 py-1.5 text-xs font-bold rounded-lg border border-[#EBE8DE] bg-white text-[#14171A]"
-                aria-label="Toggle language"
+                href={`/${locale}/contact`}
+                className="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black text-white font-semibold text-sm hover:bg-neutral-800 active:scale-95 transition-all shadow-2xs"
               >
-                {locale === 'en' ? 'عربي' : 'EN'}
+                <span>{content.cta.talk}</span>
+                <ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
               </Link>
 
+              {/* Minimalist 2-line Hamburger Trigger (ROAR Style) */}
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl bg-white border border-[#EBE8DE] text-[#14171A] hover:bg-[#FAF9F5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3B53]"
-                aria-expanded={mobileMenuOpen}
-                aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+                onClick={() => setDrawerOpen(!drawerOpen)}
+                className="w-10 h-10 rounded-full bg-[#F5F4F0] border border-[#EBE8DE] text-black hover:bg-black hover:text-white flex flex-col items-center justify-center gap-1.5 transition-all duration-200 shadow-2xs group cursor-pointer"
+                aria-expanded={drawerOpen}
+                aria-label={drawerOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               >
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6 text-[#FF3B53]" />
+                {drawerOpen ? (
+                  <X className="w-5 h-5 group-hover:text-white" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <>
+                    <span className="w-4 h-0.5 bg-black rounded-full group-hover:bg-white transition-colors" />
+                    <span className="w-4 h-0.5 bg-black rounded-full group-hover:bg-white transition-colors" />
+                  </>
                 )}
               </button>
             </div>
@@ -151,34 +148,34 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
+      {/* Full-Screen / Slide-Out Modern Navigation Drawer (ROAR Style) */}
+      {drawerOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs md:hidden"
-          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-all duration-300"
+          onClick={() => setDrawerOpen(false)}
         >
           <div
             className={`fixed top-0 ${
               isRTL ? 'left-0' : 'right-0'
-            } w-5/6 max-w-sm h-full bg-[#FAF9F5] shadow-2xl p-6 flex flex-col justify-between border-s border-[#EBE8DE] overflow-y-auto`}
+            } w-full sm:w-[460px] h-full bg-[#FAF9F5] shadow-2xl p-6 sm:p-8 flex flex-col justify-between border-s border-[#EBE8DE] overflow-y-auto z-50`}
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              {/* Drawer Header */}
+              {/* Drawer Top Header */}
               <div className="flex items-center justify-between pb-6 border-b border-[#EBE8DE]">
                 <Logo locale={locale} />
                 <button
                   type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg bg-white border border-[#EBE8DE] text-[#586069]"
-                  aria-label="Close Navigation Drawer"
+                  onClick={() => setDrawerOpen(false)}
+                  className="w-10 h-10 rounded-full bg-white border border-[#EBE8DE] text-black hover:bg-black hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                  aria-label="Close Navigation"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Navigation Links */}
-              <nav className="mt-6 flex flex-col gap-2" aria-label="Mobile Navigation">
+              <nav className="mt-8 flex flex-col gap-2.5" aria-label="Drawer Navigation">
                 {content.nav.map((item) => {
                   const isActive =
                     pathname === item.href ||
@@ -188,84 +185,133 @@ export const Navbar: React.FC<NavbarProps> = ({ locale }) => {
                     <Link
                       key={item.key}
                       href={item.href}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold transition-colors ${
+                      className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-lg font-bold transition-all ${
                         isActive
-                          ? 'bg-[#FF3B53] text-white shadow-xs'
-                          : 'bg-white border border-[#EBE8DE] text-[#14171A] hover:bg-[#FFF0F2]'
+                          ? 'bg-black text-white shadow-md'
+                          : 'bg-white border border-[#EBE8DE] text-black hover:bg-black hover:text-white'
                       }`}
                     >
                       <span>{item.label}</span>
                       <ArrowUpRight
-                        className={`w-4 h-4 opacity-70 ${isRTL ? 'rotate-[-90deg]' : ''}`}
+                        className={`w-5 h-5 opacity-70 ${isRTL ? 'rotate-[-90deg]' : ''}`}
                       />
                     </Link>
                   );
                 })}
               </nav>
 
-              {/* Direct Quick WhatsApp Inquiries */}
+              {/* Regional Offices Quick Contact */}
               <div className="mt-8 pt-6 border-t border-[#EBE8DE] space-y-3">
                 <div className="text-xs font-bold text-[#8C959F] uppercase tracking-wider">
-                  {isRTL ? 'تواصل مباشر عبر واتساب' : 'Direct WhatsApp'}
+                  {isRTL ? 'المكاتب الإقليمية' : 'Regional Offices'}
                 </div>
-                <a
-                  href={companyData.phones.cairo.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#EBE8DE] hover:border-[#10B981] transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-[#14171A]">
-                      {isRTL ? 'فرع القاهرة (مصر)' : 'Cairo Office (Egypt)'}
-                    </div>
-                    <div className="text-xs text-[#0F4C3A] font-mono">
-                      {companyData.phones.cairo.display}
-                    </div>
-                  </div>
-                </a>
 
-                <a
-                  href={companyData.phones.saudi.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#EBE8DE] hover:border-[#10B981] transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-[#EBF7F3] text-[#0F4C3A] flex items-center justify-center shrink-0">
-                    <Phone className="w-4 h-4" />
+                {/* Saudi Arabia Office */}
+                <div className="p-4 rounded-2xl bg-white border border-[#EBE8DE] space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-black">
+                      {isRTL ? 'مكتب السعودية (الرياض)' : 'Saudi Arabia Office (Riyadh)'}
+                    </span>
+                    <span className="text-[10px] font-bold text-[#1E6B27] bg-[#EBF7F3] px-2 py-0.5 rounded-full">
+                      KSA
+                    </span>
                   </div>
-                  <div>
-                    <div className="text-xs font-semibold text-[#14171A]">
-                      {isRTL ? 'فرع المملكة العربية السعودية' : 'Saudi Arabia Line'}
-                    </div>
-                    <div className="text-xs text-[#0F4C3A] font-mono">
-                      {companyData.phones.saudi.display}
-                    </div>
+                  <div className="flex items-center gap-1.5 text-xs text-[#586069]">
+                    <MapPin className="w-3.5 h-3.5 text-[#FF3B53]" />
+                    <span>{isRTL ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia'}</span>
                   </div>
-                </a>
+                  <div className="pt-1 flex flex-wrap items-center gap-2 font-mono text-xs font-bold text-black" dir="ltr">
+                    <a href="tel:+9660547851570" className="hover:text-[#FF3B53] underline">
+                      +966 054 785 1570
+                    </a>
+                    <span>•</span>
+                    <a href="tel:+966509251351" className="hover:text-[#FF3B53] underline">
+                      +966 50 925 1351
+                    </a>
+                  </div>
+                </div>
+
+                {/* Egypt Office */}
+                <div className="p-4 rounded-2xl bg-white border border-[#EBE8DE] space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-black">
+                      {isRTL ? 'مكتب مصر (حدائق الأهرام)' : 'Egypt Office (Giza)'}
+                    </span>
+                    <span className="text-[10px] font-bold text-[#1E6B27] bg-[#EBF7F3] px-2 py-0.5 rounded-full">
+                      EGY
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-[#586069]">
+                    <MapPin className="w-3.5 h-3.5 text-[#1E6B27]" />
+                    <span>{isRTL ? 'حدائق الأهرام، الجيزة' : 'Hadayek al-ahram , Giza'}</span>
+                  </div>
+                  <div className="pt-1 font-mono text-xs font-bold text-black" dir="ltr">
+                    <a href="tel:+201150117387" className="hover:text-[#1E6B27] underline">
+                      01150117387
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Bottom Drawer Actions */}
-            <div className="pt-6 border-t border-[#EBE8DE] space-y-3">
-              <Button
-                href={`/${locale}/contact`}
-                variant="primary"
-                size="md"
-                className="w-full justify-center"
-              >
-                {content.cta.talk}
-              </Button>
-
+            {/* Drawer Bottom Actions & Social Row */}
+            <div className="pt-6 border-t border-[#EBE8DE] space-y-4">
               <Link
-                href={getSwitchLocalePath(otherLocale)}
-                className="w-full flex items-center justify-center gap-2 p-2.5 text-xs font-bold rounded-xl border border-[#EBE8DE] bg-white text-[#14171A]"
+                href={`/${locale}/contact`}
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-black text-white font-bold text-sm hover:bg-neutral-800 transition-all shadow-md"
               >
-                <Globe className="w-4 h-4 text-[#FF3B53]" />
-                <span>{locale === 'en' ? 'التحويل إلى اللغة العربية' : 'Switch to English'}</span>
+                <span>{content.cta.talk}</span>
+                <ArrowUpRight className={`w-4 h-4 ${isRTL ? 'rotate-[-90deg]' : ''}`} />
               </Link>
+
+              {/* Social Icons Row in Drawer */}
+              <div className="flex items-center justify-center gap-2">
+                <a
+                  href={companyData.socialLinks.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white border border-[#EBE8DE] flex items-center justify-center text-black hover:bg-black hover:text-white transition-all"
+                  aria-label="TikTok"
+                >
+                  <TikTokIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href={companyData.socialLinks.behance}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white border border-[#EBE8DE] flex items-center justify-center text-black hover:bg-black hover:text-white transition-all"
+                  aria-label="Behance"
+                >
+                  <BehanceIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href={companyData.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white border border-[#EBE8DE] flex items-center justify-center text-black hover:bg-black hover:text-white transition-all"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedInIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href={companyData.socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white border border-[#EBE8DE] flex items-center justify-center text-black hover:bg-black hover:text-white transition-all"
+                  aria-label="Instagram"
+                >
+                  <InstagramIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href={companyData.socialLinks.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white border border-[#EBE8DE] flex items-center justify-center text-black hover:bg-black hover:text-white transition-all"
+                  aria-label="Facebook"
+                >
+                  <FacebookIcon className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
