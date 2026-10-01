@@ -263,14 +263,130 @@ export const siteContent = {
     },
     projects: [
       {
+        slug: 'printing-devices-campaign',
+        title: 'Printing & Office Hardware E-Commerce',
+        client: 'Regional Tech & Hardware Enterprise',
+        category: 'Performance Marketing & Google Ads',
+        categoryKey: 'ads',
+        year: 'Verified InDesign 2027 Record',
+        summary:
+          'High-efficiency search and shopping acquisition campaigns achieving a massive 3,649.87% ROAS with 279 verified purchase conversions.',
+        fullStory:
+          'Marketing Melon managed targeted Google Ads campaigns for commercial printing devices. By restructuring high-intent search keywords, negative matching, and bid optimization, the campaign generated 68,400 SAR in verified sales from an ad spend of just 1,870 SAR (3,649.87% ROAS).',
+        verifiedScope: [
+          'Google Search & Shopping Campaign Architecture',
+          'Conversion Tracking & Analytics Audit',
+          'High-Intent Keyword Precision Bidding',
+          'ROAS Scaling & Bid Strategy Automation',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'Verified InDesign Company Profile record: 3,649.87% ROAS | 279 Purchases | 68.4K SAR Sales | 1.87K SAR Cost.',
+        heroColor: 'from-blue-700 via-indigo-900 to-black',
+        tags: ['Google Ads', '3,649% ROAS', 'E-Commerce', 'B2B'],
+        galleryItems: [
+          {
+            title: '3,649.87% ROAS Conversion Report',
+            caption: '279 purchases delivering 68,400 SAR on 1,870 SAR spend.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'beauty-skincare-scaling',
+        title: 'Luxury Beauty & Skincare Brand',
+        client: 'GCC Cosmetics E-Commerce',
+        category: 'Performance Marketing & Social Commerce',
+        categoryKey: 'ads',
+        year: 'Verified InDesign 2027 Record',
+        summary:
+          'Scaling high-converting paid traffic across Meta & Google Ads, generating 428,000 SAR in gross sales from 43,700 qualified clicks.',
+        fullStory:
+          'Through dynamic catalog ads, compelling beauty creative angles, and rigorous retargeting funnels, Marketing Melon delivered over 428,000 SAR in direct consumer purchases on a total spend of 9,330 SAR, recording a 4,587% overall return.',
+        verifiedScope: [
+          'Meta Advantage+ & Dynamic Product Ads',
+          'Google Performance Max Campaigns',
+          'Audience Retargeting & LTV Optimization',
+          'Creative A/B Testing & Video Hooks',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'Verified InDesign Company Profile record: 43.7K Clicks | 428K SAR Sales | 9.33K SAR Cost.',
+        heroColor: 'from-pink-600 via-rose-900 to-black',
+        tags: ['Beauty', '428K SAR Sales', 'Meta Ads', 'Google Ads'],
+        galleryItems: [
+          {
+            title: '428K SAR Sales Acquisition Metric',
+            caption: '43.7K targeted clicks converted across the GCC market.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'luxury-jewelry-reach',
+        title: 'Gold & Fine Jewelry Boutique',
+        client: 'Regional Fine Jewelry Atelier',
+        category: 'Brand Awareness & High-End Performance',
+        categoryKey: 'ads',
+        year: 'Verified InDesign 2027 Record',
+        summary:
+          'Multi-channel brand awareness and conversion campaign reaching over 2.05 Million impressions and driving 72,900 SAR in fine jewelry acquisitions.',
+        fullStory:
+          'High-ticket jewelry requires trust-centric storytelling combined with high-frequency luxury visual assets. Marketing Melon orchestrated a high-impact digital rollout achieving 2.05M impressions and 23.3K targeted clicks with strong ROAS.',
+        verifiedScope: [
+          'High-End Luxury Visual Creative Direction',
+          'Precision High-Net-Worth Audience Targeting',
+          'Google Search & Social Conversion Funnel',
+          'Omnichannel Brand Authority Building',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'Verified InDesign Company Profile record: 2.05M Impressions | 23.3K Clicks | 72.9K SAR Sales | 14.3K SAR Cost.',
+        heroColor: 'from-amber-600 via-yellow-900 to-black',
+        tags: ['Fine Jewelry', '2.05M Impressions', 'Luxury', 'Performance'],
+        galleryItems: [
+          {
+            title: '2.05M Impressions Campaign Reach',
+            caption: '23,300 clicks and 72,900 SAR generated for fine gold pieces.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'organic-seo-dominance',
+        title: 'Search Console & Technical SEO Dominance',
+        client: 'Enterprise Regional Platform',
+        category: 'Technical SEO & Organic Visibility',
+        categoryKey: 'web',
+        year: 'Verified InDesign 2027 Record',
+        summary:
+          'Long-term organic search engineering generating 3.32 Million Google search impressions, 96,700 clicks, and over 34,000 active users.',
+        fullStory:
+          'By rebuilding site technical architecture, conducting keyword gap mapping, optimizing Core Web Vitals, and implementing semantic topic clusters, Marketing Melon scaled search visibility to 3.32M impressions and 993,000 active web events.',
+        verifiedScope: [
+          'Technical SEO Architecture & Site Speed',
+          'Bilingual Semantic Keyword Clustering',
+          'Search Console Indexing & CTR Optimization',
+          'Google Analytics 4 Tracking & Event Mapping',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'Verified InDesign Company Profile record: 3.32M Impressions | 96.7K Clicks | 34K Active Users | 993K Events.',
+        heroColor: 'from-emerald-600 via-teal-950 to-black',
+        tags: ['Technical SEO', '3.32M Impressions', '96.7K Clicks', 'Google Analytics'],
+        galleryItems: [
+          {
+            title: '3.32M Organic Search Impressions',
+            caption: '96.7K organic clicks with a 5.1% CTR on target keywords.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
         slug: 'al-eairy-residence',
         title: 'Al Eairy Residence',
         client: 'Al Eairy Residence',
         category: 'Hospitality & Real Estate Marketing',
         categoryKey: 'production',
-        year: 'Recent verified project',
+        year: 'Verified InDesign & LinkedIn Record',
         summary:
-          'Comprehensive creative direction, visual media production, and digital presentation for residential & hospitality accommodation.',
+          'Comprehensive creative direction, ground & drone visual media production, and digital presentation for residential & hospitality accommodation.',
         fullStory:
           'Al Eairy Residence is an established accommodation and residential hospitality brand. Marketing Melon was engaged to elevate the brand’s digital visual presence, producing high-quality imagery, promotional storytelling, and multi-channel marketing content that showcases property interiors, living spaces, and guest experiences.',
         verifiedScope: [
@@ -280,7 +396,7 @@ export const siteContent = {
           'Digital Marketing & Placement',
         ],
         isVerifiedProject: true,
-        sourceNote: 'Verified client relationship documented on official LinkedIn updates.',
+        sourceNote: 'Verified client relationship documented on official LinkedIn updates and agency archives.',
         heroColor: 'from-amber-700 via-rose-900 to-emerald-950',
         tags: ['Hospitality', 'Video Production', 'Creative Direction', 'Social Media'],
         galleryItems: [
@@ -619,14 +735,130 @@ export const siteContent = {
     },
     projects: [
       {
+        slug: 'printing-devices-campaign',
+        title: 'أجهزة الطباعة وحلول المكاتب',
+        client: 'شركة رائدة في قطاع الأجهزة والطباعة',
+        category: 'التسويق بالأداء وإعلانات Google',
+        categoryKey: 'ads',
+        year: 'سجل موثق في ملف الشركة 2027',
+        summary:
+          'حملات إعلانية عالية الكفاءة عبر شبكة بحث وجوجل للتسوق حققت عائداً استثمارياً مذهلاً 3,649.87% ROAS مع 279 عملية شراء ناجحة.',
+        fullStory:
+          'أدارت وكالة ماركتنج ميلون حملات إعلانية مستهدفة عبر إعلانات Google لقطاع أجهزة ومعدات الطباعة. من خلال إعادة هيكلة الكلمات المفتاحية ذات نية الشراء العالية، استبعاد الكلمات السلبية، وضبط عروض الأسعار، حققت الحملة مبيعات بقيمة 68,400 ريال سعودي من ميزانية إعلانية بلغت 1,870 ريال فقط (عائد ROAS 3,649.87%).',
+        verifiedScope: [
+          'هيكلة حملات Google Search وShopping المتطورة',
+          'تدقيق وضبط بكسل التتبع والتحويلات ومؤشرات الأداء',
+          'استهداف كلمات البحث ذات النية الشرائية العالية',
+          'أتمتة استراتيجيات المزايدة لتعظيم العائد على الإنفاق',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'موثق في ملف الشركة الرسمي 2027: عائد ROAS 3,649.87% | 279 عملية شراء | 68.4 ألف ريال مبيعات | 1.87 ألف ريال تكلفة.',
+        heroColor: 'from-blue-700 via-indigo-900 to-black',
+        tags: ['إعلانات Google', 'عائد 3,649%', 'تجارة إلكترونية', 'B2B'],
+        galleryItems: [
+          {
+            title: 'تقرير عائد الاستثمار 3,649.87% ROAS',
+            caption: '279 طلب شراء بمبيعات 68,400 ريال مقابل تكلفة 1,870 ريال.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'beauty-skincare-scaling',
+        title: 'مستحضرات التجميل والعناية بالبشرة',
+        client: 'متجر خليجي رائد لمستحضرات التجميل',
+        category: 'التسويق بالأداء والتجارة الإلكترونية',
+        categoryKey: 'ads',
+        year: 'سجل موثق في ملف الشركة 2027',
+        summary:
+          'توسيع نطاق المبيعات الإلكترونية عبر Meta وGoogle Ads، محققاً مبيعات إجمالية تجاوزت 428,000 ريال سعودي من 43,700 نقرة مستهدفة.',
+        fullStory:
+          'عبر إعلانات الكتالوج الديناميكي والزوايا الإعلانية الجذابة ومسارات إعادة الاستهداف المتقدمة، قادت ماركتنج ميلون مبيعات مباشرة تجاوزت 428,000 ريال سعودي من ميزانية إجمالية بلغت 9,330 ريال بنسبة عائد إجمالي 4,587%.',
+        verifiedScope: [
+          'حملات Meta Advantage+ وإعلانات المنتجات الديناميكية',
+          'حملات Google Performance Max متعددة القنوات',
+          'إعادة الاستهداف وتحسين القيمة الدائمة للعميل (LTV)',
+          'اختبارات A/B المستمرة للنسخ الإعلانية والفيديوهات',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'موثق في ملف الشركة الرسمي 2027: 43.7 ألف نقرة | 428 ألف ريال مبيعات | 9.33 ألف ريال تكلفة.',
+        heroColor: 'from-pink-600 via-rose-900 to-black',
+        tags: ['تجميل وعناية', 'مبيعات 428 ألف ريال', 'إعلانات Meta', 'Google Ads'],
+        galleryItems: [
+          {
+            title: 'مبيعات بقيمة 428 ألف ريال',
+            caption: '43.7 ألف نقرة مستهدفة تحولت إلى طلبات شراء في السوق الخليجي.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'luxury-jewelry-reach',
+        title: 'مجوهرات فاخرة وذهب',
+        client: 'دار مجوهرات راقية',
+        category: 'بناء العلامة الفاخرة والتسويق بالأداء',
+        categoryKey: 'ads',
+        year: 'سجل موثق في ملف الشركة 2027',
+        summary:
+          'حملة شاملة لتعزيز الوعي بالعلامة والتحويل المباشر، حققت أكثر من 2.05 مليون ظهور وأكثر من 72,900 ريال مبيعات في قطاع المجوهرات.',
+        fullStory:
+          'يتطلب تسويق المجوهرات الفاخرة رواية بصرية تبني الثقة مصحوبة بأصول فاخرة عالية التردد. نظمت ماركتنج ميلون انطلاقة رقمية واسعة حصدت أكثر من 2.05 مليون ظهور و23.3 ألف نقرة مستهدفة بعائد استثماري مميز.',
+        verifiedScope: [
+          'التوجيه الفني البصري لمنتجات الرفاهية والمجوهرات',
+          'استهداف فئات الجمهور ذات الملاءة المالية العالية',
+          'مسار تحويل متكامل عبر محركات البحث وشبكات التواصل',
+          'بناء موثوقية العلامة ومكانتها الفاخرة في السوق',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'موثق في ملف الشركة الرسمي 2027: 2.05 مليون ظهور | 23.3 ألف نقرة | 72.9 ألف ريال مبيعات | 14.3 ألف ريال تكلفة.',
+        heroColor: 'from-amber-600 via-yellow-900 to-black',
+        tags: ['مجوهرات فاخرة', '2.05 مليون ظهور', 'فخامة', 'أداء إعلاني'],
+        galleryItems: [
+          {
+            title: 'وصول واسع تجاوز 2.05 مليون ظهور',
+            caption: '23,300 نقرة ومبيعات بقيمة 72,900 ريال للمشغولات الذهبية.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
+        slug: 'organic-seo-dominance',
+        title: 'تصدر محركات البحث وتحسين SEO التقني',
+        client: 'منصة رقمية كبرى',
+        category: 'الـ SEO التقني والظهور المجاني',
+        categoryKey: 'web',
+        year: 'سجل موثق في ملف الشركة 2027',
+        summary:
+          'هندسة متقدمة لتحسين محركات البحث أنتجت أكثر من 3.32 مليون ظهور في Google و96,700 نقرة وأكثر من 34,000 مستخدم نشط.',
+        fullStory:
+          'من خلال إعادة بناء البنية التقنية للموقع، سد فجوات الكلمات المفتاحية، تسريع الأداء وتحسين Core Web Vitals، وتطبيق العناقيد الدلالية (Topic Clusters)، ضاعفت ماركتنج ميلون الظهور المجاني ليصل إلى 3.32M ظهور و993,000 حدث تفاعلي على الموقع.',
+        verifiedScope: [
+          'البنية التقنية للـ SEO وسرعة استجابة الخوادم',
+          'توزيع الكلمات الدلالية باللغتين العربية والإنجليزية',
+          'تحسين الأرشفة في Google Search Console ومعدل النقر (CTR)',
+          'تتبع Google Analytics 4 وخرائط تفاعل الزوار',
+        ],
+        isVerifiedProject: true,
+        sourceNote: 'موثق في ملف الشركة الرسمي 2027: 3.32 مليون ظهور | 96.7 ألف نقرة | 34 ألف مستخدم نشط | 993 ألف حدث.',
+        heroColor: 'from-emerald-600 via-teal-950 to-black',
+        tags: ['SEO تقني', '3.32 مليون ظهور', '96.7 ألف نقرة', 'Google Analytics'],
+        galleryItems: [
+          {
+            title: '3.32 مليون ظهور في نتائج البحث',
+            caption: '96.7 ألف نقرة عضوية بمعدل نقر 5.1% على الكلمات الرئيسية.',
+            aspectRatio: '16/9',
+          },
+        ],
+      },
+      {
         slug: 'al-eairy-residence',
         title: 'ريزيدنس العيري',
         client: 'Al Eairy Residence',
         category: 'تسويق الضيافة والوحدات السكنية',
         categoryKey: 'production',
-        year: 'مشروع حديث موثق',
+        year: 'مشروع موثق في ملف الوكالة',
         summary:
-          'توجيه فني إبداعي، إنتاج المحتوى المرئي، والتسويق الرقمي لمنشأة ضيافة وإقامة سكنية.',
+          'توجيه فني إبداعي، إنتاج المحتوى المرئي الأرضي والجوي، والتسويق الرقمي لمنشأة ضيافة وإقامة سكنية.',
         fullStory:
           'ريزيدنس العيري هي علامة ضيافة وسكنية معروفة. تم التعاون مع ماركتنج ميلون لتعزيز الحضور البصري الرقمي للعلامة، وإنتاج لقطات تصويرية ومحتوى ترويجي يبرز جمالية الغرف والمرافق والخدمات المقدمة للنزلاء عبر مختلف المنصات الرقمية.',
         verifiedScope: [
@@ -636,7 +868,7 @@ export const siteContent = {
           'التسويق الرقمي وتوزيع المحتوى',
         ],
         isVerifiedProject: true,
-        sourceNote: 'مشروع حقيقي موثق ومذكور رسمياً في تحديثات الوكالة على لينكد إن.',
+        sourceNote: 'مشروع حقيقي موثق ومذكور رسمياً في تحديثات الوكالة وسجلات الأعمال.',
         heroColor: 'from-amber-700 via-rose-900 to-emerald-950',
         tags: ['قطاع الضيافة', 'إنتاج مرئي', 'توجيه إبداعي', 'سوشيال ميديا'],
         galleryItems: [
