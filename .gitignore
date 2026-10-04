@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# heavy assets
+*.pdf
+*.psd
+data/*.pdf
+data/**/*.pdf
+data/**/*.psd
+
