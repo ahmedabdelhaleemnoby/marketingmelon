@@ -51,7 +51,7 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
       title: isRTL ? 'عيادات بايو لايف — إنتاج المحتوى الطبي والرعاية الصحية' : 'BioLife Clinic — Medical Video Production & Healthcare Reels',
       category: isRTL ? 'إنتاج سينمائي وتصوير طبي متخصص' : 'Medical Cinematography & Studio Production',
       categoryKey: 'videography',
-      image: '/images/work/biolife-kh4.jpg',
+      image: '/images/work/biolife-profile.png',
       badge: isRTL ? 'إنتاج طبي متخصص' : 'Medical Production',
       accentColor: 'from-teal-600 via-emerald-950 to-black',
     },
