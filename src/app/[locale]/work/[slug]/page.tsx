@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { siteContent, companyData } from '@/data/content';
 import { Locale } from '@/types/content';
@@ -95,42 +96,62 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#FF3B53]/25 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl space-y-6">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge
-                variant="emerald"
-                size="sm"
-                className="bg-black/40 backdrop-blur-md text-[#80ED99] border-white/20"
-              >
-                <Building className="w-3 h-3" />
-                <span>{project.category}</span>
-              </Badge>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className={`${project.image ? 'lg:col-span-7' : 'lg:col-span-12'} space-y-6`}>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge
+                  variant="emerald"
+                  size="sm"
+                  className="bg-black/40 backdrop-blur-md text-[#80ED99] border-white/20"
+                >
+                  <Building className="w-3 h-3" />
+                  <span>{project.category}</span>
+                </Badge>
 
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#10B981]/20 backdrop-blur-md text-[#80ED99] text-xs font-bold border border-[#10B981]/30">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>{isRTL ? 'مشروع معتمد' : 'Verified Project'}</span>
-              </span>
+                {project.isVerifiedProject && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#10B981]/20 backdrop-blur-md text-[#80ED99] text-xs font-bold border border-[#10B981]/30">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>{isRTL ? 'مشروع معتمد' : 'Verified Project'}</span>
+                  </span>
+                )}
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+                {project.title}
+              </h1>
+
+              <p className="text-base sm:text-lg text-white/85 leading-relaxed font-medium">
+                {project.summary}
+              </p>
+
+              {/* Client & Metadata Pills */}
+              <div className="pt-4 border-t border-white/20 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-white/80">
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60 font-semibold">{isRTL ? 'العميل:' : 'Client:'}</span>
+                  <span className="font-bold text-white">{project.client}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-[#80ED99]" />
+                  <span className="font-mono">{project.year}</span>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
-              {project.title}
-            </h1>
-
-            <p className="text-base sm:text-lg text-white/85 leading-relaxed font-medium">
-              {project.summary}
-            </p>
-
-            {/* Client & Metadata Pills */}
-            <div className="pt-4 border-t border-white/20 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-white/80">
-              <div className="flex items-center gap-2">
-                <span className="text-white/60 font-semibold">{isRTL ? 'العميل:' : 'Client:'}</span>
-                <span className="font-bold text-white">{project.client}</span>
+            {project.image && (
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-md h-72 sm:h-96 rounded-2xl overflow-hidden border border-white/25 shadow-2xl backdrop-blur-sm group">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#80ED99]" />
-                <span className="font-mono">{project.year}</span>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -172,21 +193,36 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 {project.galleryItems?.map((item, idx) => (
                   <div
                     key={idx}
-                    className="rounded-2xl bg-white border border-[#EBE8DE] p-6 space-y-3 shadow-2xs hover:border-[#FF3B53]/30 transition-all card-hover-glow"
+                    className="rounded-2xl bg-white border border-[#EBE8DE] overflow-hidden shadow-2xs hover:border-[#FF3B53]/30 transition-all card-hover-glow group flex flex-col justify-between"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#FFF0F2] text-[#FF3B53] flex items-center justify-center">
-                      {idx === 0 ? (
-                        <Video className="w-5 h-5" />
-                      ) : (
-                        <Layers className="w-5 h-5" />
+                    {item.image && (
+                      <div className="relative w-full h-56 sm:h-64 bg-neutral-900 overflow-hidden">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6 space-y-3">
+                      {!item.image && (
+                        <div className="w-10 h-10 rounded-xl bg-[#FFF0F2] text-[#FF3B53] flex items-center justify-center">
+                          {idx === 0 ? (
+                            <Video className="w-5 h-5" />
+                          ) : (
+                            <Layers className="w-5 h-5" />
+                          )}
+                        </div>
                       )}
+                      <h4 className="text-base font-bold text-[#14171A]">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-[#586069] leading-relaxed">
+                        {item.caption}
+                      </p>
                     </div>
-                    <h4 className="text-base font-bold text-[#14171A]">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-[#586069] leading-relaxed">
-                      {item.caption}
-                    </p>
                   </div>
                 ))}
               </div>

@@ -34,10 +34,13 @@ export interface ProjectItem {
   sourceNote: string;
   heroColor: string;
   tags: string[];
+  image?: string;
+  badge?: string;
   galleryItems?: {
     title: string;
     caption: string;
     aspectRatio: string;
+    image?: string;
   }[];
 }
 

@@ -26,6 +26,76 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
 
   const showcases = [
     {
+      id: 'al-eairy-residence',
+      slug: 'al-eairy-residence',
+      title: isRTL ? 'ريزيدنس العيري — Al Eairy Residence' : 'Al Eairy Residence — Luxury Hospitality',
+      category: isRTL ? 'إنتاج سينمائي وتصوير جوي بالدرون' : 'Cinematography & Aerial Drone Production',
+      categoryKey: 'videography',
+      image: '/images/work/al-eairy-residence.png',
+      badge: isRTL ? 'مشروع معتمد — السعودية' : 'Verified Client — KSA',
+      accentColor: 'from-amber-700 via-rose-900 to-black',
+    },
+    {
+      id: 'trova-travel-tourism',
+      slug: 'trova-travel-tourism',
+      title: isRTL ? 'تروفا للسياحة — حملات شرم الشيخ والوجهات الساحلية' : 'Trova Travel — Sharm & Coastal Destination Campaigns',
+      category: isRTL ? 'سوشيال ميديا وتايبوجرافي ثلاثي الأبعاد' : 'Social Media & 3D Neon Typography',
+      categoryKey: 'social',
+      image: '/images/work/trova-sharm.jpg',
+      badge: isRTL ? 'شرم الشيخ مع تروفا' : 'Sharm with Trova',
+      accentColor: 'from-cyan-600 via-blue-900 to-black',
+    },
+    {
+      id: 'biolife-medical-clinic',
+      slug: 'biolife-medical-clinic',
+      title: isRTL ? 'عيادات بايو لايف — إنتاج المحتوى الطبي والرعاية الصحية' : 'BioLife Clinic — Medical Video Production & Healthcare Reels',
+      category: isRTL ? 'إنتاج سينمائي وتصوير طبي متخصص' : 'Medical Cinematography & Studio Production',
+      categoryKey: 'videography',
+      image: '/images/work/biolife-kh4.jpg',
+      badge: isRTL ? 'إنتاج طبي متخصص' : 'Medical Production',
+      accentColor: 'from-teal-600 via-emerald-950 to-black',
+    },
+    {
+      id: 'a26-restaurant-cafe',
+      slug: 'a26-restaurant-cafe',
+      title: isRTL ? 'كافيه ومطعم A26 — تصوير إعلاني وريلز تجارية' : 'A26 Cafe & Lounge — Commercial Product Reels & Launch',
+      category: isRTL ? 'تصوير فوتوغرافي وإنتاج مرئي للأغذية' : 'F&B Commercial Production & Photography',
+      categoryKey: 'photography',
+      image: '/images/work/a26-restaurant.jpg',
+      badge: isRTL ? 'إنتاج تجاري F&B' : 'F&B Commercial Rollout',
+      accentColor: 'from-blue-600 via-sky-950 to-black',
+    },
+    {
+      id: 'atheel-event-production',
+      slug: 'atheel-event-production',
+      title: isRTL ? 'بطولة أثيل — تغطية وتصوير الفعاليات الميدانية' : 'Atheel Champions — Sports Event & Field Production',
+      category: isRTL ? 'إنتاج سينمائي وتغطيات ميدانية حية' : 'Event Cinematography & Live Media Coverage',
+      categoryKey: 'videography',
+      image: '/images/work/football-production.jpg',
+      badge: isRTL ? 'تغطية ميدانية شاملة' : 'Live Event Production',
+      accentColor: 'from-indigo-600 via-blue-950 to-black',
+    },
+    {
+      id: 'al-eairy-national-day',
+      slug: 'al-eairy-residence',
+      title: isRTL ? 'اليوم الوطني السعودي — حملة عزنا بكرمنا (العيري)' : 'Saudi National Day — Our Pride In Generosity (Al Eairy)',
+      category: isRTL ? 'هوية بصرية وحملات وطنية' : 'Brand Identity & National Campaign',
+      categoryKey: 'branding',
+      image: '/images/work/al-eairy-national-day.png',
+      badge: isRTL ? 'اليوم الوطني السعودي' : 'Saudi National Day',
+      accentColor: 'from-emerald-700 via-teal-950 to-black',
+    },
+    {
+      id: 'trova-dahab-campaign',
+      slug: 'trova-travel-tourism',
+      title: isRTL ? 'وجهات دهب السياحية — تجربة الاستجمام الساحلية' : 'Dahab Coastal Experience — Tourism Lifestyle Campaign',
+      category: isRTL ? 'تصوير فوتوغرافي وسياحي' : 'Lifestyle & Destination Photography',
+      categoryKey: 'photography',
+      image: '/images/work/trova-dahab.jpg',
+      badge: isRTL ? 'دهب مع تروفا' : 'Dahab with Trova',
+      accentColor: 'from-amber-600 via-orange-900 to-black',
+    },
+    {
       id: 'printing-devices-campaign',
       slug: 'printing-devices-campaign',
       title: isRTL ? 'حملة أجهزة ومعدات الطباعة — 3,649% ROAS' : 'Printing Devices Campaign — 3,649% ROAS',
@@ -40,51 +110,10 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
       slug: 'beauty-skincare-scaling',
       title: isRTL ? 'مستحضرات التجميل الفاخرة — مبيعات 428 ألف ريال' : 'Luxury Beauty & Skincare — 428K SAR Sales',
       category: isRTL ? 'إعلانات السوشيال ميديا والتجارة الإلكترونية' : 'Social Ads & E-Commerce Scaling',
-      categoryKey: 'social',
+      categoryKey: 'ads',
       image: '/images/results/google-ads-2.png',
       badge: isRTL ? 'مبيعات 428K ريال' : '428K SAR Sales',
       accentColor: 'from-pink-600 via-rose-900 to-black',
-    },
-    {
-      id: 'luxury-jewelry-reach',
-      slug: 'luxury-jewelry-reach',
-      title: isRTL ? 'دار المجوهرات الفاخرة — 2.05 مليون ظهور' : 'Fine Jewelry Atelier — 2.05M Impressions',
-      category: isRTL ? 'تصوير فوتوغرافي وحملات الرفاهية' : 'Luxury Photography & Brand Campaigns',
-      categoryKey: 'photography',
-      image: '/images/results/google-ads-3.png',
-      badge: isRTL ? '2.05 مليون ظهور' : '2.05M Impressions',
-      accentColor: 'from-amber-600 via-yellow-900 to-black',
-    },
-    {
-      id: 'organic-seo-dominance',
-      slug: 'organic-seo-dominance',
-      title: isRTL ? 'تصدر نتائج محركات البحث — 3.32 مليون ظهور' : 'Organic SEO Dominance — 3.32M Impressions',
-      category: isRTL ? 'تطوير الويب والـ SEO التقني' : 'Web Engineering & Technical SEO',
-      categoryKey: 'web',
-      image: '/images/melon-strap.png',
-      badge: isRTL ? '3.32M ظهور في Google' : '3.32M Google Impressions',
-      accentColor: 'from-emerald-600 via-teal-900 to-black',
-    },
-    {
-      id: 'al-eairy-residence',
-      slug: 'al-eairy-residence',
-      title: isRTL ? 'ريزيدنس العيري — Al Eairy Residence' : 'Al Eairy Residence',
-      category: isRTL ? 'إنتاج سينمائي وتصوير جوي بالدرون' : 'Cinematography & Aerial Drone Production',
-      categoryKey: 'videography',
-      image: '/images/characters/hero-ninja-team.jpg',
-      badge: isRTL ? 'مشروع موثق' : 'Verified Project',
-      accentColor: 'from-amber-600 via-rose-800 to-black',
-    },
-    {
-      id: 'melon-brand-system',
-      slug: 'printing-devices-campaign',
-      title: isRTL ? 'هوية ماركتنج ميلون والشخصيات الثلاثية الأبعاد' : 'Marketing Melon 3D Brand & Mascots System',
-      category: isRTL ? 'هوية بصرية وتصميم ثلاثي الأبعاد' : 'Brand Identity & 3D Spatial Design',
-      categoryKey: 'branding',
-      image: '/images/logo-transparent.png',
-      badge: isRTL ? 'هوية الوكالة 2027' : 'Agency Identity 2027',
-      accentColor: 'from-[#0037FF] via-[#001EC4] to-[#0A0E2A]',
-      isGraphicCard: true,
     },
   ];
 
@@ -140,37 +169,14 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
               className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-[#EBE8DE] flex flex-col justify-between"
             >
               {/* Media Visual Container */}
-              <div
-                className={`relative w-full h-80 sm:h-96 overflow-hidden flex items-center justify-center ${
-                  item.isGraphicCard
-                    ? 'bg-gradient-to-br from-[#0037FF] via-[#0522B0] to-[#04115C] p-8'
-                    : 'bg-neutral-900'
-                }`}
-              >
-                {item.isGraphicCard ? (
-                  <div className="relative w-full h-full flex flex-col items-center justify-center text-center">
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 relative mb-4 transform group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.4)]"
-                      />
-                    </div>
-                    <div className="text-white font-black text-xl sm:text-2xl tracking-widest uppercase">
-                      Marketing Melon
-                    </div>
-                  </div>
-                ) : (
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  />
-                )}
+              <div className="relative w-full h-80 sm:h-96 overflow-hidden flex items-center justify-center bg-neutral-900">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
 
