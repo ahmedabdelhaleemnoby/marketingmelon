@@ -154,6 +154,7 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
                         src={item.image}
                         alt={item.title}
                         fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.4)]"
                       />
                     </div>
@@ -166,6 +167,7 @@ export const WorkPreview: React.FC<WorkPreviewProps> = ({ locale }) => {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
                 )}

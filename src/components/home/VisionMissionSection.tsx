@@ -53,6 +53,7 @@ export const VisionMissionSection: React.FC<VisionMissionSectionProps> = ({ loca
                   src="/images/hero-3d-banner.png"
                   alt="Marketing Melon Agency Vision & Creative Direction"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

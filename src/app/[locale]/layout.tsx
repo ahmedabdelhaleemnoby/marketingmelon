@@ -11,14 +11,12 @@ const outfit = Outfit({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-outfit',
-  weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   display: 'swap',
   variable: '--font-cairo',
-  weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 export async function generateStaticParams() {
