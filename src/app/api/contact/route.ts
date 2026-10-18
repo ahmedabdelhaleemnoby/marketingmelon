@@ -195,23 +195,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 6. Honest Status: Recorded in dashboard store, but direct SMTP unconfigured
-    return NextResponse.json(
-      {
-        success: false,
-        error:
-          'Inquiry captured in agency dashboard! Direct email gateway is currently awaiting active SMTP credentials. Please also connect via WhatsApp or Email below for immediate response.',
-        code: 'PROVIDER_UNCONFIGURED',
-        inquiryId: savedInquiry.id,
-        directContacts: {
-          email: 'info@marketingmelon.online',
-          secondaryEmail: 'marketingmelon1@gmail.com',
-          cairoWhatsapp: 'https://wa.me/201150117387',
-          saudiWhatsapp: 'https://wa.me/966574128113',
-        },
-      },
-      { status: 503 }
-    );
+    // 6. The inquiry is saved in the admin inbox either way; email is only a notification.
+    if (!resendApiKey && !sendgridApiKey) console.warn('Inquiry saved without email notification: no RESEND_API_KEY or SENDGRID_API_KEY set.');
+    else console.error('Inquiry saved but the email notification failed to send.');
+    return NextResponse.json({ success: true, emailed: false, inquiryId: savedInquiry.id });
   } catch (error) {
     console.error('API Contact Error:', error);
     return NextResponse.json(

@@ -1,9 +1,12 @@
 import { MetadataRoute } from 'next';
+import { getDynamicContent } from '@/data/store';
+import { orderedProjects } from '@/lib/portfolio';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://marketingmelon.online';
   const locales = ['en', 'ar'];
-  const routes = ['', '/services', '/work', '/work/al-eairy-residence', '/about', '/contact'];
+  const projects = orderedProjects(getDynamicContent().en.projects).map(p => `/work/${p.slug}`);
+  const routes = ['', '/services', '/work', ...projects, '/about', '/request-service', '/contact'];
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 

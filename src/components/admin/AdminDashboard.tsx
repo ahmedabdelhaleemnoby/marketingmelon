@@ -485,7 +485,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                 { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
                 { id: 'media', label: '📸 Change Images & Media', icon: ImageIcon, highlight: true },
                 { id: 'hero', label: 'Hero & Brand Artwork', icon: Sparkles },
-                { id: 'services', label: 'Services (5 Pillars)', icon: Layers },
+                { id: 'services', label: `Services (${content.en.services.length})`, icon: Layers },
                 { id: 'projects', label: 'Projects & Case Studies', icon: FolderKanban },
                 {
                   id: 'inquiries',
@@ -587,8 +587,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                 </div>
 
                 <div className="p-6 rounded-3xl bg-white border border-[#EBE8DE] shadow-sm space-y-2">
-                  <div className="text-xs font-bold uppercase text-[#8C959F]">Active Service Pillars</div>
-                  <div className="text-3xl font-black text-[#1E6B27]">5 Pillars</div>
+                  <div className="text-xs font-bold uppercase text-[#8C959F]">Active Services</div>
+                  <div className="text-3xl font-black text-[#1E6B27]">{content.en.services.length} Services</div>
                   <div className="text-xs text-[#586069]">Verified Agency Capabilities</div>
                 </div>
 
@@ -1298,7 +1298,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
             <div className="space-y-6 max-w-5xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-black text-[#14171A]">5 Core Service Pillars</h2>
+                  <h2 className="text-2xl font-black text-[#14171A]">Services ({currentLangContent.services.length})</h2>
                   <p className="text-xs text-[#586069]">
                     Verified agency service offerings: Strategy, Social, Media Buying, Production/3D, Web Apps.
                   </p>

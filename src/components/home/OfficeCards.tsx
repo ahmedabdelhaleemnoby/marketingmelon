@@ -67,7 +67,7 @@ export const OfficeCards: React.FC<OfficeCardsProps> = ({
               {/* Phone Numbers */}
               <div className="mt-4 space-y-2 font-mono">
                 <a
-                  href="tel:+9660547851570"
+                  href="tel:+966547851570"
                   className="block text-base sm:text-lg font-bold text-[#14171A] hover:text-[#FF3B53] transition-colors"
                   dir="ltr"
                 >
@@ -96,7 +96,7 @@ export const OfficeCards: React.FC<OfficeCardsProps> = ({
               </a>
 
               <a
-                href="tel:+9660547851570"
+                href="tel:+966547851570"
                 className="inline-flex items-center justify-center p-3 rounded-full bg-[#F5F4F0] text-[#14171A] hover:bg-[#EBE8DE] transition-colors"
                 aria-label="Call Saudi Office"
               >

@@ -24,7 +24,7 @@ type Props = { locale: Locale; services: ServiceItem[]; budgetOptions: string[];
 export function RequestServiceForm({ locale, services, budgetOptions, whatsappUrl }: Props) {
   const ar = locale === 'ar';
   const preselected = useSearchParams()?.get('service');
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'saved' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -45,14 +45,13 @@ export function RequestServiceForm({ locale, services, budgetOptions, whatsappUr
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) setStatus('sent');
-      else if (data.code === 'PROVIDER_UNCONFIGURED') setStatus('saved'); // Stored in the admin inbox; email delivery is not configured.
       else { setStatus('error'); setError(data.error || (ar ? 'تعذر إرسال الطلب. حاول مرة أخرى أو راسلنا على واتساب.' : 'We couldn’t send your request. Please try again or message us on WhatsApp.')); }
     } catch {
       setStatus('error'); setError(ar ? 'تحقق من اتصالك بالإنترنت وحاول مرة أخرى.' : 'Check your connection and try again.');
     }
   }
 
-  if (status === 'sent' || status === 'saved') return <div className="request-done" role="status">
+  if (status === 'sent') return <div className="request-done" role="status">
     <CheckCircle2 size={40} aria-hidden="true" />
     <h2>{ar ? 'وصلنا طلبك!' : 'We’ve got your request!'}</h2>
     <p>{ar ? 'سيتواصل معك فريقنا قريباً. للرد الأسرع، راسلنا على واتساب.' : 'Our team will get back to you soon. For the fastest reply, message us on WhatsApp.'}</p>
