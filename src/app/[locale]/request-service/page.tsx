@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Mail, MessageCircle } from 'lucide-react';
 import { getDynamicContent, getDynamicCompanyData } from '@/data/store';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { RequestServiceForm } from '@/components/contact/RequestServiceForm';
 import type { Locale } from '@/types/content';
 export const dynamic = 'force-dynamic';
@@ -24,9 +24,8 @@ export default async function RequestServicePage({ params }: Props) {
   const content = getDynamicContent()[locale];
   const company = getDynamicCompanyData();
   return <div className="request-page">
+    <PageHeader locale={locale} crumb={ar ? 'اطلب خدمة' : 'Request service'} title={ar ? 'لنعمل معاً ونصنع أثراً' : 'Let’s work together and make an impact'} />
     <div className="agency-shell">
-      <nav className="request-crumbs" aria-label={ar ? 'مسار التنقل' : 'Breadcrumb'}><Link href={`/${locale}`}>{ar ? 'الرئيسية' : 'Home'}</Link><span aria-hidden="true">/</span><span aria-current="page">{ar ? 'اطلب خدمة' : 'Request service'}</span></nav>
-      <h1>{ar ? 'لنعمل معاً ونصنع أثراً' : 'Let’s work together and make an impact'}</h1>
       <div className="request-layout">
         <Suspense fallback={<div className="request-form" aria-busy="true" />}>
           <RequestServiceForm locale={locale} services={content.services} budgetOptions={content.contactPage.form.budgetOptions} whatsappUrl={company.phones.saudi.whatsappUrl} />

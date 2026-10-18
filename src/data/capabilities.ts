@@ -2,16 +2,16 @@ import type { Locale, ServiceItem } from '@/types/content';
 
 type Capability = { id: string; image: string; en: [string, string, string[]]; ar: [string, string, string[]] };
 const capabilities: Capability[] = [
-  { id: 'strategy-marketing', image: '/images/results/google-ads-1.png',
+  { id: 'strategy-marketing', image: '/images/characters/WhatsApp Image 2025-01-14 at 3.14.17 PM.jpeg',
     en: ['Digital Marketing', 'A clear strategy connects your brand to the right people. We bring research, positioning, and campaign planning together around your business goals.', ['Market & audience research', 'Brand positioning', 'Campaign strategy', 'Channel planning & reporting']],
     ar: ['التسويق الرقمي', 'استراتيجية واضحة تصل بعلامتك إلى الجمهور المناسب. نجمع البحث وتحديد مكانة العلامة وتخطيط الحملات حول أهداف مشروعك.', ['دراسة السوق والجمهور', 'تحديد مكانة العلامة', 'استراتيجية الحملات', 'تخطيط القنوات وقياس الأداء']] },
-  { id: 'brand-identity', image: '/images/work/al-eairy-national-day.png',
+  { id: 'brand-identity', image: '/images/characters/WhatsApp Image 2025-01-14 at 3.14.18 PM (5).jpeg',
     en: ['Brand Identity', 'Give your brand a recognizable voice and visual world. From the first logo sketch to the way your identity lives across every touchpoint.', ['Logo & visual identity', 'Color & typography systems', 'Brand guidelines', 'Packaging & brand applications']],
     ar: ['الهوية البصرية', 'نمنح علامتك شخصية وصوتاً بصرياً واضحاً، من الفكرة الأولى للشعار إلى تطبيق الهوية على كل نقطة تواصل مع جمهورك.', ['تصميم الشعار والهوية', 'الألوان والخطوط', 'دليل استخدام الهوية', 'التغليف وتطبيقات العلامة']] },
-  { id: 'social-media', image: '/images/work/trova-sharm.jpg',
+  { id: 'social-media', image: '/images/characters/WhatsApp Image 2025-01-13 at 5.50.01 PM (1).jpeg',
     en: ['Social Media', 'Build a presence people want to follow. We plan, create, publish, and manage content that makes your brand part of the conversation.', ['Content strategy & calendars', 'Design & copywriting', 'Community management', 'Reels, stories & campaign content']],
     ar: ['السوشيال ميديا', 'نبني حضوراً يحب جمهورك متابعته. نخطط ونصمم وننشر وندير محتوى يضع علامتك في قلب الحوار.', ['استراتيجية وخطط المحتوى', 'التصميم وكتابة المحتوى', 'إدارة المجتمعات', 'الريلز والقصص والحملات']] },
-  { id: 'web-development', image: '/slide.png',
+  { id: 'web-development', image: '/images/characters/WhatsApp Image 2025-01-13 at 5.52.46 PM.jpeg',
     en: ['Web Development', 'Turn interest into action with a website that feels like your brand. Responsive experiences, online stores, and landing pages made for your customers.', ['Corporate websites', 'E-commerce stores', 'Landing pages', 'UI/UX & bilingual experiences']],
     ar: ['تطوير المواقع', 'نحوّل الاهتمام إلى خطوة فعلية بموقع يعبر عن علامتك. تجارب متجاوبة ومتاجر إلكترونية وصفحات هبوط مصممة لعملائك.', ['مواقع الشركات', 'المتاجر الإلكترونية', 'صفحات الهبوط', 'تجربة المستخدم والمواقع ثنائية اللغة']] },
   { id: 'production-motion', image: '/images/work/al-eairy-interior.jpg',
