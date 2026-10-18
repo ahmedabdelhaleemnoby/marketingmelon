@@ -36,6 +36,7 @@ export const companyData: CompanyInfo = {
     instagram: 'https://www.instagram.com/marketingmelonagency/',
     behance: 'https://www.behance.net/marketingmelon',
     tiktok: 'https://www.tiktok.com/@marketingmelonagency',
+    snapchat: 'https://www.snapchat.com/add/marketingmelon?share_id=laFdsLOPIYI&locale=en-US',
   },
 };
 

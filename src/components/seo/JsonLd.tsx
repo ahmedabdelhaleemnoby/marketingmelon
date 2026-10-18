@@ -35,6 +35,7 @@ export const JsonLd: React.FC<JsonLdProps> = ({ locale }) => {
       companyData.socialLinks.linkedin,
       companyData.socialLinks.instagram,
       companyData.socialLinks.behance,
+      companyData.socialLinks.snapchat,
     ],
     knowsAbout: [
       'Digital Marketing Strategy',

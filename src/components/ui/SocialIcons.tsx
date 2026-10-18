@@ -59,3 +59,18 @@ export const TikTokIcon: React.FC<IconProps> = ({ className = 'w-4 h-4' }) => (
   </svg>
 );
 
+export const SnapchatIcon: React.FC<IconProps> = ({ className = 'w-4 h-4' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M12 3c-3 0-4.75 2.16-4.75 5.25 0 .83.08 1.6.08 2.32-.35.7-1.1 1.18-1.96 1.47-.55.19-.77.58-.55.95.25.43.86.72 1.8.94.27 1.04 1.12 1.55 2.2 2 .4.17.53.42.62.9l.1.54c.03.18.2.29.38.25.56-.13 1.23-.34 2.08-.34s1.52.21 2.08.34c.18.04.35-.07.38-.25l.1-.54c.09-.48.22-.73.62-.9 1.08-.45 1.93-.96 2.2-2 .94-.22 1.55-.51 1.8-.94.22-.37 0-.76-.55-.95-.86-.29-1.61-.77-1.96-1.47 0-.72.08-1.49.08-2.32C16.75 5.16 15 3 12 3Z" />
+  </svg>
+);
+

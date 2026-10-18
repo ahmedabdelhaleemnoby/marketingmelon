@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { getDynamicCompanyData } from '@/data/store';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { ContactForm } from '@/components/contact/ContactForm';
-import { FacebookIcon, LinkedInIcon, InstagramIcon, BehanceIcon, TikTokIcon } from '@/components/ui/SocialIcons';
+import { FacebookIcon, LinkedInIcon, InstagramIcon, BehanceIcon, TikTokIcon, SnapchatIcon } from '@/components/ui/SocialIcons';
 import type { Locale } from '@/types/content';
 export const dynamic = 'force-dynamic';
 
@@ -31,6 +31,7 @@ export default async function ContactPage({ params }: Props) {
   ];
   const socials = [
     { name: 'Instagram', Icon: InstagramIcon, url: company.socialLinks.instagram }, { name: 'TikTok', Icon: TikTokIcon, url: company.socialLinks.tiktok },
+    { name: 'Snapchat', Icon: SnapchatIcon, url: company.socialLinks.snapchat },
     { name: 'Behance', Icon: BehanceIcon, url: company.socialLinks.behance }, { name: 'LinkedIn', Icon: LinkedInIcon, url: company.socialLinks.linkedin },
     { name: 'Facebook', Icon: FacebookIcon, url: company.socialLinks.facebook },
   ].filter(s => s.url);

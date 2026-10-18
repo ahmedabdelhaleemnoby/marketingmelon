@@ -13,6 +13,7 @@ import {
   InstagramIcon,
   BehanceIcon,
   TikTokIcon,
+  SnapchatIcon,
 } from '@/components/ui/SocialIcons';
 
 interface FooterProps {
@@ -65,7 +66,7 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
             </a>
           </div>
 
-          {/* Circular Social Pill Badges Row (ROAR Style: TikTok, Behance, LinkedIn, Instagram, Facebook) */}
+          {/* Circular Social Pill Badges Row */}
           <div className="pt-4 flex flex-wrap items-center gap-3">
             <a
               href={companyData.socialLinks.tiktok}
@@ -75,6 +76,16 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
               aria-label="TikTok"
             >
               <TikTokIcon className="w-5 h-5" />
+            </a>
+
+            <a
+              href={companyData.socialLinks.snapchat}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-white text-black hover:bg-[#FFFC00] hover:text-black flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-md"
+              aria-label="Snapchat"
+            >
+              <SnapchatIcon className="w-5 h-5" />
             </a>
 
             <a

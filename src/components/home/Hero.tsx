@@ -2,13 +2,13 @@ import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import type { Locale, CompanyInfo } from '@/types/content';
 import { companyData, siteContent } from '@/data/content';
-import { FacebookIcon, InstagramIcon, LinkedInIcon, BehanceIcon } from '@/components/ui/SocialIcons';
+import { FacebookIcon, InstagramIcon, LinkedInIcon, BehanceIcon, SnapchatIcon } from '@/components/ui/SocialIcons';
 import { WatermelonStripes } from './WatermelonStripes';
 
 type Props = { locale: Locale; hero?: typeof siteContent.en.hero; company?: CompanyInfo };
 export function Hero({ locale, hero = siteContent[locale].hero, company = companyData }: Props) {
   const ar = locale === 'ar';
-  const socials = [{ name: 'Instagram', Icon: InstagramIcon, url: company.socialLinks.instagram }, { name: 'Behance', Icon: BehanceIcon, url: company.socialLinks.behance }, { name: 'LinkedIn', Icon: LinkedInIcon, url: company.socialLinks.linkedin }, { name: 'Facebook', Icon: FacebookIcon, url: company.socialLinks.facebook }];
+  const socials = [{ name: 'Instagram', Icon: InstagramIcon, url: company.socialLinks.instagram }, { name: 'Snapchat', Icon: SnapchatIcon, url: company.socialLinks.snapchat }, { name: 'Behance', Icon: BehanceIcon, url: company.socialLinks.behance }, { name: 'LinkedIn', Icon: LinkedInIcon, url: company.socialLinks.linkedin }, { name: 'Facebook', Icon: FacebookIcon, url: company.socialLinks.facebook }];
   // Break the slogan before its second half ("TO …" / "إلى …") so it reads on two bold lines.
   const [first, second] = hero.tagline.split(ar ? / (?=إلى )/ : / (?=TO )/i);
   return (

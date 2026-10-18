@@ -95,6 +95,7 @@ export interface CompanyInfo {
     instagram: string;
     behance: string;
     tiktok?: string;
+    snapchat: string;
   };
 }
 

@@ -26,7 +26,14 @@ const storageDir = process.env.CMS_DATA_DIR || path.join(process.cwd(), '.data')
 const storageFile = path.join(storageDir, 'content.json');
 function readStore(): StoredContent {
   if (!existsSync(storageFile)) return structuredClone({ content: siteContent, company: companyData });
-  return JSON.parse(readFileSync(storageFile, 'utf8')) as StoredContent;
+  const stored = JSON.parse(readFileSync(storageFile, 'utf8')) as StoredContent;
+  return {
+    ...stored,
+    company: {
+      ...stored.company,
+      socialLinks: { ...companyData.socialLinks, ...stored.company.socialLinks },
+    },
+  };
 }
 function writeJson(file: string, value: unknown) {
   mkdirSync(storageDir, { recursive: true });
