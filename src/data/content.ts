@@ -13,10 +13,10 @@ export const companyData: CompanyInfo = {
     cairo: {
       display: '01150117387',
       raw: '+201150117387',
-      address: 'Hadayek al-ahram , Giza',
+      address: 'Hadayek al-Ahram, Giza',
       addressAr: 'حدائق الأهرام، الجيزة، مصر',
       whatsappUrl: 'https://wa.me/201150117387?text=Hello%20Marketing%20Melon%20Agency%2C%20I%20would%20like%20to%20inquire%20about%20a%20project.',
-      note: 'Egypt Office: Hadayek al-ahram , Giza',
+      note: 'Egypt Office: Hadayek al-Ahram, Giza',
     },
     saudi: {
       display: '+966547851570',
@@ -497,7 +497,7 @@ export const siteContent = {
           city: 'Hadayek al-Ahram, Giza',
           phone: '01150117387',
           phoneRaw: '+201150117387',
-          status: 'Egypt Office: Hadayek al-ahram , Giza',
+          status: 'Egypt Office: Hadayek al-Ahram, Giza',
         },
         saudi: {
           country: 'Saudi Arabia',
