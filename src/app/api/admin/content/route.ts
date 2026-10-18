@@ -1,41 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  getDynamicContent,
-  updateDynamicContent,
-  getDynamicCompanyData,
-  updateDynamicCompanyData,
-} from '@/data/store';
-
-export async function GET() {
-  try {
-    const content = getDynamicContent();
-    const company = getDynamicCompanyData();
-    return NextResponse.json({ success: true, content, company });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: 'Failed to fetch content' }, { status: 500 });
-  }
+import { getDynamicContent, getDynamicCompanyData, saveWebsite } from '@/data/store';
+import { requireAdmin } from '@/lib/admin-auth';
+import { validateContent } from '@/lib/validate-content';
+export async function GET(req: NextRequest) {
+  const denied = requireAdmin(req); if (denied) return denied;
+  return NextResponse.json({ success: true, content: getDynamicContent(), company: getDynamicCompanyData() }, { headers: { 'Cache-Control': 'no-store' } });
 }
-
 export async function POST(req: NextRequest) {
+  const denied = requireAdmin(req); if (denied) return denied;
   try {
-    const body = await req.json();
-    const { content, company } = body;
-
-    if (content) {
-      updateDynamicContent(content);
-    }
-
-    if (company) {
-      updateDynamicCompanyData(company);
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: 'Website data & graphics settings updated successfully!',
-      content: getDynamicContent(),
-      company: getDynamicCompanyData(),
-    });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: 'Failed to update content' }, { status: 500 });
-  }
+    const text = await req.text();
+    if (text.length > 2_000_000) return NextResponse.json({ error: 'Content is too large.' }, { status: 413 });
+    const { content, company } = JSON.parse(text);
+    if (content && !validateContent(content)) return NextResponse.json({ error: 'Check project slugs, categories, media URLs, and required content fields.' }, { status: 400 });
+    if (company && (!company.name || !company.emails?.primary || !company.phones?.cairo || !company.phones?.saudi || !company.socialLinks)) return NextResponse.json({ error: 'Company details are incomplete.' }, { status: 400 });
+    const saved = saveWebsite(content, company);
+    return NextResponse.json({ success: true, ...saved });
+  } catch { return NextResponse.json({ error: 'Unable to save website content. Check the server storage configuration.' }, { status: 500 }); }
 }

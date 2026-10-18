@@ -1,4 +1,5 @@
-import { CompanyInfo, NavItem, ProcessStep, ProjectItem, ServiceItem } from '@/types/content';
+import { getServices } from './capabilities';
+import { CompanyInfo, NavItem, ProcessStep, ProjectItem } from '@/types/content';
 
 export const companyData: CompanyInfo = {
   name: 'Marketing Melon Agency',
@@ -18,13 +19,13 @@ export const companyData: CompanyInfo = {
       note: 'Egypt Office: Hadayek al-ahram , Giza',
     },
     saudi: {
-      display: '+9660547851570',
-      raw: '+9660547851570',
+      display: '+966547851570',
+      raw: '+966547851570',
       secondaryDisplay: '+966 50 925 1351',
       secondaryRaw: '+966509251351',
       address: 'Riyadh, Saudi Arabia',
       addressAr: 'الرياض، المملكة العربية السعودية',
-      whatsappUrl: 'https://wa.me/9660547851570?text=Hello%20Marketing%20Melon%20Agency%2C%20I%20would%20like%20to%20inquire%20about%20a%20project.',
+      whatsappUrl: 'https://wa.me/966547851570?text=Hello%20Marketing%20Melon%20Agency%2C%20I%20would%20like%20to%20inquire%20about%20a%20project.',
       secondaryWhatsappUrl: 'https://wa.me/966509251351?text=Hello%20Marketing%20Melon%20Agency%2C%20I%20would%20like%20to%20inquire%20about%20a%20project.',
       note: 'Saudi Arabia Office: Riyadh, Saudi Arabia',
     },
@@ -61,13 +62,13 @@ export const siteContent = {
     },
     hero: {
       badge: 'Creative Strategy & Performance Marketing',
-      tagline: 'Squeeze the best, beat the rest.',
+      tagline: 'FROM SPARK TO SQUEEZE',
       subtitle:
-        'Marketing Melon is a digital marketing agency combining bold creative strategy with data-informed campaigns. From high-impact video production and drone cinematography to paid media, social storytelling, and custom web development.',
+        'A full-service creative and digital marketing agency. Fresh ideas. Thoughtful design. Work that moves your brand forward.',
       ctaPrimary: "Let's Talk",
       ctaSecondary: 'Explore Our Work',
       stats: [
-        { label: 'Creative & Tech Pillars', value: '5 Core' },
+        { label: 'Creative Disciplines', value: '9' },
         { label: 'Regional Focus', value: 'EG & KSA' },
         { label: 'Production Coverage', value: 'Ground & Drone' },
       ],
@@ -82,133 +83,7 @@ export const siteContent = {
       subtitle:
         'A comprehensive agency offering verified across strategy, performance, media creation, and digital engineering.',
     },
-    services: [
-      {
-        id: 'strategy-marketing',
-        title: 'Strategy & Digital Marketing',
-        shortDescription:
-          'Data-informed market positioning, campaign architecture, and growth planning tailored to regional markets.',
-        fullDescription:
-          'We craft actionable digital marketing blueprints that connect brand goals with target audiences. Our strategic framework bridges market research, competitor landscape analysis, channel prioritization, and measurable KPIs.',
-        iconName: 'Compass',
-        highlightTag: 'Foundation',
-        scope: [
-          'Brand Positioning & Messaging Strategy',
-          'Multi-Channel Marketing Architecture',
-          'Customer Journey Mapping',
-          'Market Research & Competitor Insights',
-        ],
-        deliverables: {
-          items: [
-            'Comprehensive Digital Marketing Strategy Deck',
-            'Channel Action Plan & KPI Matrix',
-            'Audience Persona & Journey Frameworks',
-            'Quarterly Growth Roadmap',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'social-media',
-        title: 'Social Media & Content Creation',
-        shortDescription:
-          'End-to-end platform management, creative editorial calendars, and scroll-stopping storytelling.',
-        fullDescription:
-          'We turn brand social presence into active community engagement. Our team plans, writes, designs, and orchestrates creative content across Instagram, Facebook, LinkedIn, TikTok, and X with cohesive visual language.',
-        iconName: 'Share2',
-        highlightTag: 'Engagement',
-        scope: [
-          'Social Media Management & Publishing',
-          'Creative Copywriting & Visual Art Direction',
-          'Community Engagement & Moderation',
-          'Short-Form Video & Reel Production',
-        ],
-        deliverables: {
-          items: [
-            'Monthly Content Calendars with Visual Assets',
-            'Story, Reel & Carousel Formats',
-            'Platform Tone-of-Voice Guidelines',
-            'Monthly Engagement & Growth Analytics',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'paid-ads',
-        title: 'Paid Advertising & Media Buying',
-        shortDescription:
-          'Precision-targeted campaigns across Meta, Google Ads, TikTok, and programmatic networks.',
-        fullDescription:
-          'Maximizing ad spend efficiency through scientific audience segmentation, continuous creative A/B testing, pixel tracking, and conversion rate optimization across search, social, and display channels.',
-        iconName: 'TrendingUp',
-        highlightTag: 'Performance',
-        scope: [
-          'Meta Ads (Facebook & Instagram)',
-          'Google Ads (Search, Display, Performance Max, YouTube)',
-          'TikTok & Snapchat Ads Campaigns',
-          'Retargeting & Audience Funnel Optimization',
-        ],
-        deliverables: {
-          items: [
-            'Campaign Structure Setup & Pixel Auditing',
-            'Custom Ad Creatives & Copy Variations',
-            'Weekly Budget Optimization & Bid Management',
-            'Transparent Performance Dashboards',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'production-motion',
-        title: 'Production, Motion & Visual Arts',
-        shortDescription:
-          'Ground and drone cinematography, commercial photography, 2D/3D motion graphics, VFX, and CGI.',
-        fullDescription:
-          'High-end commercial production capabilities combining certified ground and aerial drone filming with state-of-the-art motion design, 3D visualization, CGI, and professional post-production editing.',
-        iconName: 'Video',
-        highlightTag: 'High-Impact',
-        scope: [
-          'Ground Commercial Filming & Photography',
-          'Aerial Drone Cinematography',
-          'Motion Graphics & Video Editing',
-          'CGI, VFX & 3D Spatial Design',
-        ],
-        deliverables: {
-          items: [
-            'Cinematic Brand Commercials & Social Cuts',
-            'High-Resolution Product & Architecture Photography',
-            '2D/3D Animated Explainers & Brand Assets',
-            'Color-Graded & Mastered Video Deliverables',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'web-development',
-        title: 'Websites & Application Development',
-        shortDescription:
-          'Modern responsive websites, landing pages, e-commerce stores, and custom mobile applications.',
-        fullDescription:
-          'Engineering digital touchpoints that convert visitors into loyal clients. We create fast, accessible, bilingual web and mobile experiences with modern tech stacks and intuitive user interfaces.',
-        iconName: 'Layout',
-        highlightTag: 'Technology',
-        scope: [
-          'Corporate Websites & Brand Portals',
-          'High-Converting Landing Pages & Funnels',
-          'E-Commerce Storefronts',
-          'Mobile Application Design & Development',
-        ],
-        deliverables: {
-          items: [
-            'Responsive Bilingual Web Experience (EN/AR)',
-            'Conversion-Optimized UI/UX Design System',
-            'Technical SEO & Core Web Vitals Optimization',
-            'CMS & API Integration Setup',
-          ],
-          isProposed: true,
-        },
-      },
-    ] as ServiceItem[],
+    services: getServices('en'),
     process: {
       eyebrow: 'Working Methodology',
       title: 'How We Collaborate',
@@ -255,9 +130,9 @@ export const siteContent = {
     },
     workSection: {
       eyebrow: 'Selected Work',
-      title: 'Verified Client Showcases',
+      title: 'Good work. Real brands.',
       subtitle:
-        'Authentic projects backed by company records and public agency portfolios. No fabricated metrics or placeholder claims.',
+        'Films, identities, campaigns, and the people behind them. Explore what we create with our clients.',
       filterAll: 'All Disciplines',
       viewCaseStudy: 'Explore Project',
     },
@@ -627,8 +502,8 @@ export const siteContent = {
         saudi: {
           country: 'Saudi Arabia',
           city: 'Riyadh, Saudi Arabia',
-          phone: '+9660547851570 / +966 50 925 1351',
-          phoneRaw: '+9660547851570',
+          phone: '+966547851570 / +966 50 925 1351',
+          phoneRaw: '+966547851570',
           secondaryPhoneRaw: '+966509251351',
           status: 'Saudi Arabia Office: Riyadh, Saudi Arabia',
         },
@@ -729,133 +604,7 @@ export const siteContent = {
       subtitle:
         'منظومة خدمات موثقة تغطي الاستراتيجية، الأداء الإعلاني، الإنتاج المرئي، وتطوير الحلول الرقمية.',
     },
-    services: [
-      {
-        id: 'strategy-marketing',
-        title: 'استراتيجية التسويق والنمو الرقمي',
-        shortDescription:
-          'تحديد التموضع التنافسي للعلامة التجارية، وبناء خطط الحملات الموجهة بالبيانات وفق احتياجات الأسواق الإقليمية.',
-        fullDescription:
-          'نصمم مخططات تسويق رقمي قابلة للتنفيذ الفعلي تربط أهداف العلامة التجارية بالجمهور المستهدف بدقة، معتمدة على أبحاث السوق وتحليل المنافسين وتحديد مؤشرات الأداء الأساسية (KPIs).',
-        iconName: 'Compass',
-        highlightTag: 'الأساس الاستراتيجي',
-        scope: [
-          'استراتيجية تموضع العلامة والرسائل الإعلانية',
-          'هيكلة خطط التسويق عبر القنوات المتعددة',
-          'رسم خرائط رحلة العميل واستهداف الجمهور',
-          'أبحاث السوق وتحليل المنافسين',
-        ],
-        deliverables: {
-          items: [
-            'وثيقة استراتيجية التسويق الرقمي الشاملة',
-            'خطة قنوات النشر ومصفوفة مؤشرات الأداء',
-            'نماذج شخصيات الجمهور المستهدف',
-            'خطة عمل ربع سنوية لتحقيق النمو',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'social-media',
-        title: 'إدارة منصات التواصل وصناعة المحتوى',
-        shortDescription:
-          'إدارة متكاملة للحسابات، وجداول محتوى إبداعية، ورواية بصرية تخطف انتباه الجمهور وتنمي التفاعل.',
-        fullDescription:
-          'نحول صفحات علامتك التجارية على شبكات التواصل إلى مجتمع نشط ومتفاعل. نخطط، نكتب، نصمم، وننشر المحتوى الإبداعي عبر إنستغرام، فيسبوك، لينكد إن، وتيك توك بهوية بصرية متسقة.',
-        iconName: 'Share2',
-        highlightTag: 'بناء التفاعل',
-        scope: [
-          'إدارة شاملة لحسابات التواصل وجدولة المنشورات',
-          'كتابة إعلانية إبداعية وتوجيه فني للهوية',
-          'إدارة التفاعل والرد على استفسارات المتابعين',
-          'إنتاج مقاطع الفيديو القصيرة والريلز (Reels)',
-        ],
-        deliverables: {
-          items: [
-            'تقويم شهري للمحتوى مع التصاميم الجاهزة',
-            'تصاميم تفاعلية ومنشورات كاروسيل ومقاطع ريلز',
-            'دليل نبرة الصوت والكتابة للعلامة التجارية',
-            'تقارير تحليلية شهرية لمعدلات النمو والتفاعل',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'paid-ads',
-        title: 'الإعلانات الممولة وشراء الوسائط',
-        shortDescription:
-          'حملات إعلانية مدفوعة وعالية الدقة عبر Meta، إعلانات Google، وتيك توك لتحقيق أعلى عائد استثماري.',
-        fullDescription:
-          'تعظيم كفاءة الميزانيات الإعلانية من خلال الاستهداف الذكي، الاختبارات الإبداعية المستمرة (A/B Testing)، تتبع التحويلات، وتحسين معدلات الشراء والتسجيل.',
-        iconName: 'TrendingUp',
-        highlightTag: 'الأداء والنتائج',
-        scope: [
-          'إعلانات Meta (فيسبوك وإنستغرام)',
-          'إعلانات Google (البحث، الشبكة الإعلانية، Performance Max، يوتيوب)',
-          'حملات إعلانات تيك توك وسناب شات',
-          'إعادة الاستهداف وتحسين مسار التحويل (Conversion Funnel)',
-        ],
-        deliverables: {
-          items: [
-            'إعداد هيكل الحملات وتركيب أدوات التتبع (Pixel)',
-            'تصميم نسخ إعلانية متعددة واختبارها',
-            'تحسين الميزانيات وعروض الأسعار أسبوعياً',
-            'لوحة تحكم شفافة لنتائج الحملات ومؤشرات العائد',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'production-motion',
-        title: 'الإنتاج المرئي، الموشن جرافيكس والفنون البصرية',
-        shortDescription:
-          'تصوير سينمائي أرضي وجوي بالدرون، تصوير فوتوغرافي، موشن جرافيكس ثنائي وثلاثي الأبعاد، CGI وVFX.',
-        fullDescription:
-          'إمكانيات إنتاجية تجارية متقدمة تجمع بين التصوير الأرضي والتصوير الجوي المعتمد بالطائرات المسيرة (Drone)، مع تصميم الرسوم المتحركة ثلاثية الأبعاد، الخدع البصرية، والمونتاج الاحترافي.',
-        iconName: 'Video',
-        highlightTag: 'إنتاج استثنائي',
-        scope: [
-          'تصوير سينمائي تجاري وتصوير فوتوغرافي احترافي',
-          'تصوير جوي بالدرون للمنشآت والفعاليات',
-          'موشن جرافيكس ومونتاج وتلوين سينمائي',
-          'تصميم ثلاثي الأبعاد (3D)، CGI وVFX',
-        ],
-        deliverables: {
-          items: [
-            'إعلانات مرئية سينمائية ومقاطع مخصصة للسوشيال ميديا',
-            'صور فوتوغرافية عالية الدقة للمنتجات والمشاريع المعمارية',
-            'فيديوهات موشن جرافيكس توضيحية ومؤثرات بصرية',
-            'تسليم النسخ النهائية بعد التلوين والمكساج الصوتي',
-          ],
-          isProposed: true,
-        },
-      },
-      {
-        id: 'web-development',
-        title: 'تطوير المواقع والمتاجر والتطبيقات',
-        shortDescription:
-          'مواقع إلكترونية سريعة ومتجاوبة، صفحات هبوط عالية التحويل، متاجر إلكترونية، وتطبيقات هاتف مخصصة.',
-        fullDescription:
-          'نبني الواجهات الرقمية التي تحول الزوار إلى عملاء دائمين. نقدم تجارب مستخدم ثنائية اللغة (عربي/إنجليزي) تجمع بين سرعة الأداء وسهولة الاستخدام وأحدث المعايير التقنية.',
-        iconName: 'Layout',
-        highlightTag: 'حلول تقنية',
-        scope: [
-          'مواقع تعريفية وبوابات رقمية للشركات',
-          'صفحات هبوط عالية التحويل للحملات الإعلانية',
-          'متاجر إلكترونية متكاملة',
-          'تصميم وتطوير تطبيقات الهواتف الذكية',
-        ],
-        deliverables: {
-          items: [
-            'موقع متجاوب ثنائي اللغة يدعم RTL بالكامل',
-            'نظام تصميم حديث لواجهات وتجربة المستخدم (UI/UX)',
-            'تهيئة محركات البحث (SEO) وتحسين سرعة التحميل',
-            'ربط لوحات التحكم وأنظمة إدارة المحتوى والـ APIs',
-          ],
-          isProposed: true,
-        },
-      },
-    ] as ServiceItem[],
+    services: getServices('ar'),
     process: {
       eyebrow: 'منهجية العمل',
       title: 'كيف ندير مشاريعنا مع الشركاء',
@@ -1274,8 +1023,8 @@ export const siteContent = {
         saudi: {
           country: 'المملكة العربية السعودية',
           city: 'الرياض، المملكة العربية السعودية',
-          phone: '+9660547851570 / +966 50 925 1351',
-          phoneRaw: '+9660547851570',
+          phone: '+966547851570 / +966 50 925 1351',
+          phoneRaw: '+966547851570',
           secondaryPhoneRaw: '+966509251351',
           status: 'مكتب السعودية: الرياض، المملكة العربية السعودية',
         },
@@ -1335,3 +1084,37 @@ export const siteContent = {
     },
   },
 };
+
+// The same projects power the home page, portfolio, detail pages, and editor.
+const projectMedia: Record<string, { video?: string; disciplines: import('@/types/content').Discipline[]; order: number }> = {
+  'al-eairy-residence': { video: '/videos/al-eairy.mp4', disciplines: ['videography', 'photography', 'branding'], order: 0 },
+  'biolife-medical-clinic': { video: '/videos/biolife.mp4', disciplines: ['videography', 'social'], order: 1 },
+  'a26-restaurant-cafe': { video: '/videos/a26.mp4', disciplines: ['videography', 'photography'], order: 2 },
+  'atheel-event-production': { video: '/videos/atheel.mp4', disciplines: ['events', 'videography'], order: 3 },
+  'trova-travel-tourism': { disciplines: ['social', 'photography'], order: 5 },
+};
+for (const locale of ['en', 'ar'] as const) {
+  const ar = locale === 'ar';
+  siteContent[locale].projects = siteContent[locale].projects.map((project, i) => {
+    const media = projectMedia[project.slug];
+    return { ...project, video: media?.video, disciplines: media?.disciplines, sortOrder: media?.order ?? i + 10, published: true };
+  });
+  siteContent[locale].projects.push({
+    slug: 'marketing-melon-motion', client: 'Marketing Melon', title: ar ? 'هوية تتحرك بروح ميلون' : 'A brand with a little more motion',
+    category: ar ? 'الموشن جرافيك' : 'Motion Graphics', categoryKey: 'production', year: '2025',
+    summary: ar ? 'فيلم موشن جرافيك يقدم عالم ماركتنج ميلون الإبداعي.' : 'A motion graphics film introducing Marketing Melon’s creative world.',
+    fullStory: ar ? 'تحريك يجمع شخصية العلامة ورسالتها في فيلم قصير، من مكتبة أعمال ميلون.' : 'Animation brings the brand’s personality and message together in a short film from the Melon creative library.',
+    verifiedScope: ar ? ['الموشن جرافيك', 'محتوى العلامة'] : ['Motion graphics', 'Brand content'],
+    isVerifiedProject: true, sourceNote: 'Marketing Melon Media / Melon / 2025 / Aug / reels', heroColor: 'from-green-800 to-black',
+    tags: ['Motion', 'Animation'], image: '/images/hero-3d-banner.png', video: '/videos/melon-motion.mp4', disciplines: ['motion'], sortOrder: 4, published: true,
+  });
+  siteContent[locale].servicesSection.title = ar ? 'إمكانيات متكاملة لعلامتك' : 'A full-service approach';
+  siteContent[locale].servicesSection.subtitle = ar ? 'الاستراتيجية والهوية والمحتوى والتقنية مع فريق إبداعي واحد.' : 'Strategy, identity, content, and technology, brought together by one creative team.';
+  siteContent[locale].workSection.title = ar ? 'أعمال تحكي عنّا.' : 'Good work. Real brands.';
+  siteContent[locale].workSection.subtitle = ar ? 'أفلام وهويات وحملات نصنعها مع عملائنا. شاهد ما نصنعه، وتعرف على قصصه.' : 'Films, identities, and campaigns made with our clients. Discover what we create together.';
+}
+
+siteContent.en.hero.badge = 'MARKETING MELON — EGYPT & SAUDI ARABIA';
+siteContent.ar.hero.badge = 'ماركتنج ميلون — مصر والسعودية';
+siteContent.ar.hero.tagline = 'من الفكرة إلى الصدارة';
+siteContent.ar.hero.subtitle = 'وكالة متكاملة للإبداع والتسويق الرقمي. أفكار جديدة، تصميم مدروس، وأعمال تدفع علامتك إلى الأمام.';

@@ -48,3 +48,7 @@ data/**/*.pdf
 data/**/*.psd
 Marketing Melon Media/
 
+
+# Persistent local CMS content and user uploads
+/.data/
+/public/uploads/

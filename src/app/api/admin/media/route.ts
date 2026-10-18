@@ -1,8 +1,10 @@
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { readdir, stat, unlink } from 'fs/promises';
 import path from 'path';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const denied = requireAdmin(req); if (denied) return denied;
   try {
     const publicDir = path.join(process.cwd(), 'public');
     const imagesDir = path.join(publicDir, 'images');
@@ -20,7 +22,7 @@ export async function GET() {
     try {
       const imageFiles = await readdir(imagesDir);
       for (const file of imageFiles) {
-        if (/\.(png|jpg|jpeg|webp|svg|gif|ico)$/i.test(file)) {
+        if (/\.(png|jpg|jpeg|webp|gif|ico|mp4|webm)$/i.test(file)) {
           const stats = await stat(path.join(imagesDir, file));
           mediaList.push({
             url: `/images/${file}`,
@@ -39,7 +41,7 @@ export async function GET() {
     try {
       const uploadFiles = await readdir(uploadsDir);
       for (const file of uploadFiles) {
-        if (/\.(png|jpg|jpeg|webp|svg|gif|ico)$/i.test(file)) {
+        if (/\.(png|jpg|jpeg|webp|gif|ico|mp4|webm)$/i.test(file)) {
           const stats = await stat(path.join(uploadsDir, file));
           mediaList.push({
             url: `/uploads/${file}`,
@@ -67,6 +69,7 @@ export async function GET() {
 }
 
 export async function DELETE(req: NextRequest) {
+  const denied = requireAdmin(req); if (denied) return denied;
   try {
     const { searchParams } = new URL(req.url);
     const fileUrl = searchParams.get('url');

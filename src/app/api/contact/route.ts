@@ -20,6 +20,10 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// Visitor input is placed in notification emails, so escape it first.
+const escapeHtml = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+const optionalText = (value: unknown, max = 120) => (typeof value === 'string' && value.trim() ? value.trim().slice(0, max) : undefined);
+
 export async function POST(req: NextRequest) {
   try {
     const ip =
@@ -41,6 +45,10 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { name, email, phone, company, services, budget, message, honeypot } = body;
+    const location = optionalText(body.location);
+    const workLocation = optionalText(body.workLocation);
+    const source = optionalText(body.source);
+    const serviceList: string[] = (Array.isArray(services) ? services : services ? [services] : []).filter((s: unknown): s is string => typeof s === 'string').slice(0, 20);
 
     // 2. Anti-Spam Honeypot Verification
     if (honeypot && honeypot.trim().length > 0) {
@@ -78,7 +86,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!message || typeof message !== 'string' || message.trim().length < 10) {
+    // A project overview is required unless the visitor picked at least one service.
+    const overview = typeof message === 'string' ? message.trim() : '';
+    if (serviceList.length === 0 && overview.length < 10) {
       return NextResponse.json(
         {
           success: false,
@@ -95,10 +105,27 @@ export async function POST(req: NextRequest) {
       email: email.trim(),
       phone: phone?.trim() || undefined,
       company: company?.trim() || undefined,
-      services: Array.isArray(services) ? services : services ? [services] : [],
+      services: serviceList,
       budget: budget || undefined,
-      message: message.trim(),
+      message: overview,
+      location,
+      workLocation,
+      source,
     });
+
+    const details = `
+      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(phone || 'Not provided')}</p>
+      <p><strong>Current location:</strong> ${escapeHtml(location || 'Not provided')}</p>
+      <p><strong>Company:</strong> ${escapeHtml(company || 'Not provided')}</p>
+      <p><strong>Work location:</strong> ${escapeHtml(workLocation || 'Not provided')}</p>
+      <p><strong>Services:</strong> ${escapeHtml(serviceList.join(', ') || 'Not specified')}</p>
+      <p><strong>Budget:</strong> ${escapeHtml(budget || 'Not specified')}</p>
+      <p><strong>Found us via:</strong> ${escapeHtml(source || 'Not specified')}</p>
+      <hr />
+      <p><strong>Project overview:</strong></p>
+      <p style="white-space: pre-wrap;">${escapeHtml(overview || 'Not provided')}</p>`;
 
     // 5. Provider Dispatch Check (Resend, SendGrid, or Custom SMTP via Env Vars)
     const resendApiKey = process.env.RESEND_API_KEY;
@@ -117,19 +144,8 @@ export async function POST(req: NextRequest) {
             from: process.env.RESEND_FROM_EMAIL || 'inquiries@marketingmelon.online',
             to: [contactRecipient],
             reply_to: email.trim(),
-            subject: `New Project Inquiry from ${name} (${company || 'Direct Client'})`,
-            html: `
-              <h2>New Project Inquiry - Marketing Melon Website</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-              <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-              <p><strong>Services:</strong> ${Array.isArray(services) ? services.join(', ') : services || 'Not specified'}</p>
-              <p><strong>Budget Range:</strong> ${budget || 'Not specified'}</p>
-              <hr />
-              <p><strong>Project Overview:</strong></p>
-              <p style="white-space: pre-wrap;">${message}</p>
-            `,
+            subject: `New Project Inquiry from ${String(name).trim()} (${company || 'Direct Client'})`,
+            html: `<h2>New Project Inquiry - Marketing Melon Website</h2>${details}`,
           }),
         });
 
@@ -161,18 +177,7 @@ export async function POST(req: NextRequest) {
             content: [
               {
                 type: 'text/html',
-                value: `
-                  <h2>New Project Inquiry</h2>
-                  <p><strong>Name:</strong> ${name}</p>
-                  <p><strong>Email:</strong> ${email}</p>
-                  <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-                  <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-                  <p><strong>Services:</strong> ${Array.isArray(services) ? services.join(', ') : services || 'Not specified'}</p>
-                  <p><strong>Budget:</strong> ${budget || 'Not specified'}</p>
-                  <hr />
-                  <p><strong>Message:</strong></p>
-                  <p style="white-space: pre-wrap;">${message}</p>
-                `,
+                value: `<h2>New Project Inquiry</h2>${details}`,
               },
             ],
           }),

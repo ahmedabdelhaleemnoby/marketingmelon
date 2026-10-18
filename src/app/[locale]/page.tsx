@@ -1,4 +1,6 @@
 import React from 'react';
+import { getDynamicContent, getDynamicCompanyData } from '@/data/store';
+export const dynamic = 'force-dynamic';
 import { Hero } from '@/components/home/Hero';
 import { ServicesPreview } from '@/components/home/ServicesPreview';
 import { MilestonesSection } from '@/components/home/MilestonesSection';
@@ -16,15 +18,17 @@ export default async function HomePage({ params }: HomePageProps) {
   const rawLocale = (await params).locale;
   const locale: Locale = rawLocale === 'ar' ? 'ar' : 'en';
 
+  const content = getDynamicContent()[locale];
+  const company = getDynamicCompanyData();
   return (
     <>
       {/* 1. ROAR Style Hero Section */}
-      <Hero locale={locale} />
+      <Hero locale={locale} hero={content.hero} company={company} />
 
-      {/* 2. Empowering brands through innovative solutions (2x2 Mesh Gradient Cards) */}
-      <ServicesPreview locale={locale} />
+      {/* 2. Empowering brands through innovative solutions (Image-led Service Cards) */}
+      <ServicesPreview locale={locale} services={content.services} />
 
-      {/* 3. Our Milestones (Atmospheric Neon Blue/Red Stats Banner) */}
+      {/* 3. Our Milestones (Agency Milestones) */}
       <MilestonesSection locale={locale} />
 
       {/* 4. Partners in Success Quote Banner */}
@@ -34,7 +38,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <VisionMissionSection locale={locale} />
 
       {/* 6. Selected Case Studies with Category Filter Pills */}
-      <WorkPreview locale={locale} />
+      <WorkPreview locale={locale} projects={content.projects} />
 
       {/* 7. Saudi Arabia (Riyadh) & Egypt (Hadayek al-Ahram) Office Cards */}
       <OfficeCards locale={locale} showBgImage />
