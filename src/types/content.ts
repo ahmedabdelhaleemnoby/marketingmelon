@@ -12,6 +12,7 @@ export interface ServiceItem {
   shortDescription: string;
   fullDescription: string;
   iconName: string;
+  image?: string;
   scope: string[];
   deliverables: {
     items: string[];
@@ -19,6 +20,8 @@ export interface ServiceItem {
   };
   highlightTag: string;
 }
+
+export type Discipline = 'branding' | 'social' | 'ads' | 'photography' | 'videography' | 'motion' | 'events' | 'web';
 
 export interface ProjectItem {
   slug: string;
@@ -36,10 +39,16 @@ export interface ProjectItem {
   tags: string[];
   image?: string;
   badge?: string;
+  clientLogo?: string;
+  video?: string;
+  disciplines?: Discipline[];
+  sortOrder?: number;
+  published?: boolean;
   galleryItems?: {
     title: string;
     caption: string;
     aspectRatio: string;
+    video?: string;
     image?: string;
   }[];
 }

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Locale, ServiceItem, ProjectItem } from '@/types/content';
+import { ProjectEditor } from './ProjectEditor';
 import { siteContent, companyData } from '@/data/content';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -53,6 +54,9 @@ interface Inquiry {
   services: string[];
   budget?: string;
   message: string;
+  location?: string;
+  workLocation?: string;
+  source?: string;
   createdAt: string;
   status: 'new' | 'contacted' | 'in_progress' | 'archived';
   notes?: string;
@@ -92,14 +96,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
 
   const generalFileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Load inquiries, media, and stored content on mount
   useEffect(() => {
-    const isAuth = sessionStorage.getItem('mm_admin_auth');
-    if (isAuth === 'true') {
-      setIsAuthenticated(true);
-    }
-    fetchData();
-    fetchMedia();
+    fetch('/api/admin/session').then(r => r.json()).then(data => {
+      if (data.authenticated) { setIsAuthenticated(true); void fetchData(); void fetchMedia(); }
+    }).catch(() => setAuthError('Unable to connect. Please try again.'));
   }, []);
 
   const fetchData = async () => {
@@ -136,21 +136,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
     }
   };
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (passcode === 'melon2026' || passcode === 'admin') {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('mm_admin_auth', 'true');
-      setAuthError('');
-    } else {
-      setAuthError('Invalid passcode. Default passcode is: melon2026');
-    }
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); setAuthError('');
+    try {
+      const res = await fetch('/api/admin/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: passcode }) });
+      const data = await res.json();
+      if (!res.ok) { setAuthError(data.error || 'Unable to sign in.'); return; }
+      setIsAuthenticated(true); setPasscode(''); await fetchData(); await fetchMedia();
+    } catch { setAuthError('Unable to connect. Please try again.'); }
   };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    sessionStorage.removeItem('mm_admin_auth');
-  };
+  const handleLogout = async () => { await fetch('/api/admin/session', { method: 'DELETE' }); setIsAuthenticated(false); };
 
   const handleSave = async () => {
     setSaveStatus('saving');
@@ -165,6 +160,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
         setSaveStatus('saved');
         setTimeout(() => setSaveStatus('idle'), 3000);
       } else {
+        const data = await res.json();
+        setUploadMessage({ type: 'error', text: data.error || 'Unable to save changes.' });
         setSaveStatus('error');
       }
     } catch {
@@ -192,7 +189,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
       if (res.ok && data.success) {
         setUploadMessage({
           type: 'success',
-          text: `Image updated successfully (${data.fileName})! Website graphics reloaded.`,
+          text: `File uploaded (${data.fileName}).` ,
         });
         setCacheBuster(Date.now());
         await fetchMedia();
@@ -206,7 +203,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
     } catch (err) {
       setUploadMessage({
         type: 'error',
-        text: 'Network error while uploading image.',
+        text: 'Network error while uploading media.',
       });
     } finally {
       setUploadingSlot(null);
@@ -312,6 +309,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
               </label>
               <input
                 type="password"
+                autoComplete="current-password"
+                aria-label="Admin password"
                 required
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
@@ -485,7 +484,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
               {[
                 { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
                 { id: 'media', label: '📸 Change Images & Media', icon: ImageIcon, highlight: true },
-                { id: 'hero', label: 'Hero & 3D Artwork', icon: Sparkles },
+                { id: 'hero', label: 'Hero & Brand Artwork', icon: Sparkles },
                 { id: 'services', label: 'Services (5 Pillars)', icon: Layers },
                 { id: 'projects', label: 'Projects & Case Studies', icon: FolderKanban },
                 {
@@ -742,7 +741,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                       </div>
                       <p className="text-xs text-[#586069]">
-                        Isolated 3D watermelon characters for the interactive 3D hero stage.
+                        Isolated 3D watermelon characters for the brand artwork library.
                       </p>
                       <div className="relative h-44 rounded-2xl bg-[#FAF8EF] border border-[#EBE8DE] flex items-center justify-center p-3 group overflow-hidden">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -773,7 +772,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/png,image/jpeg,image/webp,image/gif"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -827,7 +826,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/png,image/jpeg,image/webp,image/gif"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -881,7 +880,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/png,image/jpeg,image/webp,image/gif"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -935,7 +934,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/png,image/jpeg,image/webp,image/gif"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -989,7 +988,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </span>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/png,image/jpeg,image/webp,image/gif"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -1022,7 +1021,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                     <input
                       ref={generalFileInputRef}
                       type="file"
-                      accept="image/*"
+                      accept="image/png,image/jpeg,image/webp,image/gif"
                       className="hidden"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
@@ -1190,7 +1189,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                       Change
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
                         className="hidden"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
@@ -1217,7 +1216,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                       Change
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
                         className="hidden"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
@@ -1391,142 +1390,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
             </div>
           )}
 
-          {/* TAB 5: PROJECTS & CASE STUDIES */}
-          {activeTab === 'projects' && (
-            <div className="space-y-6 max-w-5xl">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-black text-[#14171A]">
-                    Projects & Case Studies Portfolio
-                  </h2>
-                  <p className="text-xs text-[#586069]">
-                    Showcase client campaigns with verified deliverables and custom photography/graphics.
-                  </p>
-                </div>
-                <Badge variant="coral" size="sm">
-                  {editingLang.toUpperCase()}
-                </Badge>
-              </div>
-
-              <div className="space-y-6">
-                {currentLangContent.projects.map((project, pIdx) => (
-                  <div
-                    key={project.slug}
-                    className="p-6 md:p-8 rounded-3xl bg-white border border-[#EBE8DE] space-y-6 shadow-sm"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EBE8DE] pb-4">
-                      <div>
-                        <span className="text-xs font-mono uppercase text-[#FF3B53] font-bold">
-                          {project.category} • {project.year}
-                        </span>
-                        <h3 className="text-xl font-black text-[#14171A]">{project.title}</h3>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full bg-[#1E6B27]/10 text-[#1E6B27] text-xs font-bold">
-                          Verified Case Study
-                        </span>
-                        <Link
-                          href={`/${editingLang}/work/${project.slug}`}
-                          target="_blank"
-                          className="px-3 py-1 rounded-lg bg-[#FAF8EF] border border-[#EBE8DE] text-xs font-bold text-[#14171A] hover:bg-[#FF3B53] hover:text-white transition-colors inline-flex items-center gap-1"
-                        >
-                          <span>Live Page</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Image Uploader for Project */}
-                    <div className="p-4 rounded-2xl bg-[#FAF9F5] border border-[#EBE8DE] space-y-3">
-                      <div className="text-xs font-bold uppercase text-[#14171A] flex items-center justify-between">
-                        <span>Project Hero / Gallery Image</span>
-                        <span className="text-[10px] text-[#586069]">
-                          Upload a high-res photo for this case study
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#14171A] text-white text-xs font-bold hover:bg-[#FF3B53] transition-colors">
-                          <Upload className="w-3.5 h-3.5" />
-                          <span>Upload Photo to Project</span>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) handleFileUpload(file, `project_${project.slug}`);
-                            }}
-                          />
-                        </label>
-                        <span className="text-xs text-[#8C959F]">
-                          Images uploaded here are saved to the Media Library.
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-xs font-bold uppercase text-[#8C959F]">
-                          Client Name
-                        </label>
-                        <input
-                          type="text"
-                          value={project.client}
-                          onChange={(e) => {
-                            const newProjects = [...currentLangContent.projects];
-                            newProjects[pIdx] = { ...project, client: e.target.value };
-                            setContent({
-                              ...content,
-                              [editingLang]: { ...currentLangContent, projects: newProjects },
-                            });
-                          }}
-                          className="w-full px-3 py-2 rounded-xl border border-[#EBE8DE] text-sm font-bold focus:border-[#FF3B53] outline-none"
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-xs font-bold uppercase text-[#8C959F]">
-                          Case Study Title
-                        </label>
-                        <input
-                          type="text"
-                          value={project.title}
-                          onChange={(e) => {
-                            const newProjects = [...currentLangContent.projects];
-                            newProjects[pIdx] = { ...project, title: e.target.value };
-                            setContent({
-                              ...content,
-                              [editingLang]: { ...currentLangContent, projects: newProjects },
-                            });
-                          }}
-                          className="w-full px-3 py-2 rounded-xl border border-[#EBE8DE] text-sm font-bold focus:border-[#FF3B53] outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold uppercase text-[#8C959F]">
-                        Executive Summary
-                      </label>
-                      <textarea
-                        rows={2}
-                        value={project.summary}
-                        onChange={(e) => {
-                          const newProjects = [...currentLangContent.projects];
-                          newProjects[pIdx] = { ...project, summary: e.target.value };
-                          setContent({
-                            ...content,
-                            [editingLang]: { ...currentLangContent, projects: newProjects },
-                          });
-                        }}
-                        className="w-full px-3 py-2 rounded-xl border border-[#EBE8DE] text-sm focus:border-[#FF3B53] outline-none"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {activeTab === 'projects' && <ProjectEditor locale={editingLang} projects={currentLangContent.projects}
+            onChange={projects => setContent(prev => ({ ...prev, [editingLang]: { ...prev[editingLang], projects } }))}
+            onMedia={(slug, patch) => setContent(prev => ({ ...prev,
+              en: { ...prev.en, projects: prev.en.projects.map(p => p.slug === slug ? { ...p, ...patch } : p) },
+              ar: { ...prev.ar, projects: prev.ar.projects.map(p => p.slug === slug ? { ...p, ...patch } : p) },
+            }))}
+            onMove={(slug, direction) => setContent(prev => {
+              const ordered = prev[editingLang].projects.toSorted((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+              const i = ordered.findIndex(p => p.slug === slug); const next = i + direction;
+              if (i < 0 || next < 0 || next >= ordered.length) return prev;
+              [ordered[i], ordered[next]] = [ordered[next], ordered[i]];
+              const order = new Map(ordered.map((p, index) => [p.slug, index]));
+              return { ...prev, en: { ...prev.en, projects: prev.en.projects.map(p => ({ ...p, sortOrder: order.get(p.slug) ?? 999 })) }, ar: { ...prev.ar, projects: prev.ar.projects.map(p => ({ ...p, sortOrder: order.get(p.slug) ?? 999 })) } };
+            })}
+            onAdd={slug => setContent(prev => {
+              const base: ProjectItem = { slug, title: '', client: '', summary: '', fullStory: '', category: 'Video', categoryKey: 'production', year: String(new Date().getFullYear()), verifiedScope: [], tags: [], sourceNote: '', isVerifiedProject: false, heroColor: 'from-green-800 to-black', disciplines: ['videography'], published: false, sortOrder: Math.max(0, ...prev.en.projects.map(p => p.sortOrder ?? 0)) + 1 };
+              return { ...prev, en: { ...prev.en, projects: [...prev.en.projects, { ...base, title: 'New project' }] }, ar: { ...prev.ar, projects: [...prev.ar.projects, { ...base, title: 'مشروع جديد', category: 'الفيديو' }] } };
+            })}
+          />}
 
           {/* TAB 6: LEADS & INQUIRIES CRM */}
           {activeTab === 'inquiries' && (
@@ -1598,9 +1480,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ initialLocale })
                         </div>
                       </div>
 
-                      <div className="p-4 rounded-2xl bg-[#FAF8EF] border border-[#EBE8DE] text-sm text-[#14171A] leading-relaxed">
-                        “{inq.message}”
+                      <div className="flex flex-wrap gap-2 text-xs">
+                        {inq.services.map((service) => (
+                          <span key={service} className="px-2.5 py-1 rounded-lg bg-[#EBF7F3] text-[#1E6B27] font-bold">{service}</span>
+                        ))}
+                        {inq.location && <span className="px-2.5 py-1 rounded-lg bg-[#F5F4F0]">Based in: {inq.location}</span>}
+                        {inq.workLocation && <span className="px-2.5 py-1 rounded-lg bg-[#F5F4F0]">Work in: {inq.workLocation}</span>}
+                        {inq.budget && <span className="px-2.5 py-1 rounded-lg bg-[#F5F4F0]">Budget: {inq.budget}</span>}
+                        {inq.source && <span className="px-2.5 py-1 rounded-lg bg-[#F5F4F0]">Found us via: {inq.source}</span>}
                       </div>
+
+                      {inq.message && (
+                        <div className="p-4 rounded-2xl bg-[#FAF8EF] border border-[#EBE8DE] text-sm text-[#14171A] leading-relaxed">
+                          “{inq.message}”
+                        </div>
+                      )}
 
                       {inq.phone && (
                         <div className="flex items-center gap-2 pt-2">
