@@ -17,7 +17,20 @@ export function isAdmin(req: NextRequest) {
 }
 export function checkOrigin(req: NextRequest) {
   const origin = req.headers.get('origin');
-  return !origin || origin === req.nextUrl.origin;
+  if (!origin) return true;
+
+  try {
+    const originUrl = new URL(origin);
+    const forwardedHost = req.headers.get('x-forwarded-host')?.split(',')[0]?.trim();
+    const forwardedProto = req.headers.get('x-forwarded-proto')?.split(',')[0]?.trim();
+    const expectedHost = forwardedHost || req.headers.get('host') || req.nextUrl.host;
+    const expectedProto = forwardedProto || req.nextUrl.protocol.replace(':', '');
+
+    return originUrl.host.toLowerCase() === expectedHost.toLowerCase()
+      && originUrl.protocol === `${expectedProto}:`;
+  } catch {
+    return false;
+  }
 }
 export function requireAdmin(req: NextRequest) {
   if (!isAdmin(req)) return NextResponse.json({ error: 'Please sign in to manage the website.' }, { status: 401 });
