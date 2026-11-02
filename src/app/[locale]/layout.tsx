@@ -103,7 +103,7 @@ export default async function LocaleLayout({
   const fontClass = isRTL ? cairo.variable : outfit.variable;
 
   return (
-    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className={fontClass}>
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className={fontClass} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
@@ -111,6 +111,7 @@ export default async function LocaleLayout({
         className={`bg-[#FAF9F5] text-[#14171A] min-h-screen flex flex-col font-sans selection:bg-[#FF3B53] selection:text-white ${
           isRTL ? 'font-[family-name:var(--font-cairo)]' : 'font-[family-name:var(--font-outfit)]'
         }`}
+        suppressHydrationWarning
       >
         {/* Skip to Main Content for Accessibility */}
         <a
