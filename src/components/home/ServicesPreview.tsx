@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import type { Locale, ServiceItem } from '@/types/content';
 import { getServices } from '@/data/capabilities';
 
-// The four headline services; their images are the Melon ninja mascots (see capabilities.ts).
+// The four headline services, using the supplied service artwork.
 export const featuredServiceIds = ['brand-identity', 'strategy-marketing', 'web-development', 'social-media'];
 
 export function ServicesPreview({ locale, services = getServices(locale) }: { locale: Locale; services?: ServiceItem[] }) {
@@ -14,7 +14,7 @@ export function ServicesPreview({ locale, services = getServices(locale) }: { lo
   return <section id="services" className="home-services">
     <div className="agency-shell">
       <div className="home-service-cards">{cards.map(service => <Link className="home-service-card" key={service.id} href={`/${locale}/services#${service.id}`}>
-        <Image src={service.image || '/images/hero-3d-banner.png'} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw" />
+        <div className="home-service-image"><Image src={service.image || '/images/hero-3d-banner.png'} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw" /></div>
         <div className="home-service-copy"><h3>{service.title}<ArrowUpRight size={20} aria-hidden="true" /></h3><p>{service.shortDescription}</p></div>
       </Link>)}</div>
       <div className="home-empower">
