@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Pause, Play, RotateCw } from 'lucide-react';
-import { WatermelonStripes } from './WatermelonStripes';
 import type { CrystalControls } from './CrystalScene';
 
 export function CrystalArtwork({ services, ar }: { services: string[]; ar: boolean }) {
@@ -48,7 +47,6 @@ export function CrystalArtwork({ services, ar }: { services: string[]; ar: boole
   };
   return <>
     <div className={`crystal-artwork${ready ? ' is-ready' : ''}`}>
-      <div className="crystal-fallback" aria-hidden="true"><WatermelonStripes /></div>
       <canvas ref={canvas} aria-hidden="true" />
     </div>
     {ready && <div className="crystal-controls">
